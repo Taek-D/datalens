@@ -19,12 +19,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Upload
 
-- [ ] **UPLD-01**: 사용자가 CSV/JSON 파일을 드래그앤드롭으로 업로드할 수 있다
-- [ ] **UPLD-02**: 사용자가 파일 선택 대화상자로도 업로드할 수 있다 (폴백)
+- [x] **UPLD-01**: 사용자가 CSV/JSON 파일을 드래그앤드롭으로 업로드할 수 있다
+- [x] **UPLD-02**: 사용자가 파일 선택 대화상자로도 업로드할 수 있다 (폴백)
 - [x] **UPLD-03**: 업로드 시 컬럼 타입을 자동 감지한다 (숫자/카테고리/날짜/텍스트)
-- [ ] **UPLD-04**: 업로드 후 첫 50행 미리보기 테이블을 즉시 표시한다 (react-window 가상화)
+- [x] **UPLD-04**: 업로드 후 첫 50행 미리보기 테이블을 즉시 표시한다 (react-window 가상화)
 - [x] **UPLD-05**: 파일 크기 제한 (10MB) 초과 시 명확한 에러 메시지를 표시한다
-- [ ] **UPLD-06**: 새 파일 업로드 시 이전 데이터 상태가 완전히 초기화된다
+- [x] **UPLD-06**: 새 파일 업로드 시 이전 데이터 상태가 완전히 초기화된다
 
 ### Analysis API
 
@@ -58,15 +58,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### State & Performance
 
-- [ ] **PERF-01**: Zustand DatasetStore로 전역 상태를 관리한다 (3 슬라이스: dataset, analysis, ui)
+- [x] **PERF-01**: Zustand DatasetStore로 전역 상태를 관리한다 (3 슬라이스: dataset, analysis, ui)
 - [ ] **PERF-02**: React.memo + useMemo로 불필요한 차트 리렌더링을 방지한다
 - [ ] **PERF-03**: react-window로 대용량 데이터 테이블을 가상화한다
 
 ### Testing
 
-- [ ] **TEST-01**: 모든 커스텀 훅에 대응하는 Vitest 테스트가 존재한다
+- [x] **TEST-01**: 모든 커스텀 훅에 대응하는 Vitest 테스트가 존재한다
 - [ ] **TEST-02**: ChartRouter 타입 분기 로직에 유닛 테스트가 존재한다
-- [ ] **TEST-03**: analysisApi에 MSW 기반 모킹 테스트가 존재한다
+- [x] **TEST-03**: analysisApi에 MSW 기반 모킹 테스트가 존재한다
 - [x] **TEST-04**: 백엔드 서비스에 pytest 테스트가 존재한다
 - [ ] **TEST-05**: 업로드 → 분석 → 차트 렌더링 통합 테스트가 존재한다
 
@@ -104,12 +104,12 @@ Deferred to future release. Tracked but not in current roadmap.
 | INFRA-05 | Phase 1 | Complete |
 | INFRA-06 | Phase 1 | Complete |
 | INFRA-07 | Phase 1 | Complete |
-| UPLD-01 | Phase 2 | Pending |
-| UPLD-02 | Phase 2 | Pending |
+| UPLD-01 | Phase 2 | Complete |
+| UPLD-02 | Phase 2 | Complete |
 | UPLD-03 | Phase 2 | Complete |
-| UPLD-04 | Phase 2 | Pending |
+| UPLD-04 | Phase 2 | Complete |
 | UPLD-05 | Phase 2 | Complete |
-| UPLD-06 | Phase 2 | Pending |
+| UPLD-06 | Phase 2 | Complete |
 | ANLZ-01 | Phase 2 | Complete |
 | ANLZ-02 | Phase 2 | Complete |
 | ANLZ-03 | Phase 2 | Complete |
@@ -128,12 +128,12 @@ Deferred to future release. Tracked but not in current roadmap.
 | SUMM-02 | Phase 3 | Pending |
 | SUMM-03 | Phase 3 | Pending |
 | SUMM-04 | Phase 3 | Pending |
-| PERF-01 | Phase 2 | Pending |
+| PERF-01 | Phase 2 | Complete |
 | PERF-02 | Phase 3 | Pending |
 | PERF-03 | Phase 3 | Pending |
-| TEST-01 | Phase 2 | Pending |
+| TEST-01 | Phase 2 | Complete |
 | TEST-02 | Phase 3 | Pending |
-| TEST-03 | Phase 2 | Pending |
+| TEST-03 | Phase 2 | Complete |
 | TEST-04 | Phase 2 | Complete |
 | TEST-05 | Phase 4 | Pending |
 

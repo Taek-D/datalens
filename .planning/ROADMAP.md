@@ -13,7 +13,7 @@ DataLens goes from empty repository to a deployed, portfolio-ready EDA platform 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Skeleton + Deploy** - Monorepo scaffold, data contracts, CI, and live deployment targets on Vercel + Render
-- [ ] **Phase 2: Upload + API + State** - End-to-end upload-to-analysis pipeline with backend services, Zustand store, hooks, and tests
+- [x] **Phase 2: Upload + API + State** - End-to-end upload-to-analysis pipeline with backend services, Zustand store, hooks, and tests (completed 2026-03-27)
 - [ ] **Phase 3: Visualization** - All chart surfaces, outlier panel, correlation heatmap, summary cards, and data quality alerts
 - [ ] **Phase 4: Polish + Edge Cases** - Full integration test, adversarial input hardening, UX polish, and demo-day verification
 
@@ -91,6 +91,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Skeleton + Deploy | 2/2 | Complete    | 2026-03-27 |
-| 2. Upload + API + State | 1/2 | In Progress|  |
+| 2. Upload + API + State | 2/2 | Complete   | 2026-03-27 |
 | 3. Visualization | 0/2 | Not started | - |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |
