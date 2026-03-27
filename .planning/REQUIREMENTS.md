@@ -21,17 +21,17 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **UPLD-01**: 사용자가 CSV/JSON 파일을 드래그앤드롭으로 업로드할 수 있다
 - [ ] **UPLD-02**: 사용자가 파일 선택 대화상자로도 업로드할 수 있다 (폴백)
-- [ ] **UPLD-03**: 업로드 시 컬럼 타입을 자동 감지한다 (숫자/카테고리/날짜/텍스트)
+- [x] **UPLD-03**: 업로드 시 컬럼 타입을 자동 감지한다 (숫자/카테고리/날짜/텍스트)
 - [ ] **UPLD-04**: 업로드 후 첫 50행 미리보기 테이블을 즉시 표시한다 (react-window 가상화)
-- [ ] **UPLD-05**: 파일 크기 제한 (10MB) 초과 시 명확한 에러 메시지를 표시한다
+- [x] **UPLD-05**: 파일 크기 제한 (10MB) 초과 시 명확한 에러 메시지를 표시한다
 - [ ] **UPLD-06**: 새 파일 업로드 시 이전 데이터 상태가 완전히 초기화된다
 
 ### Analysis API
 
-- [ ] **ANLZ-01**: POST /api/upload 엔드포인트가 파일을 파싱하여 컬럼 메타 + 미리보기를 반환한다
-- [ ] **ANLZ-02**: POST /api/analyze 엔드포인트가 분포/상관/이상값/요약 분석 결과를 반환한다
-- [ ] **ANLZ-03**: pandas 처리를 run_in_executor로 감싸 이벤트 루프 블로킹을 방지한다
-- [ ] **ANLZ-04**: low_memory=False + 2차 타입 추론으로 혼합 타입 컬럼을 올바르게 처리한다
+- [x] **ANLZ-01**: POST /api/upload 엔드포인트가 파일을 파싱하여 컬럼 메타 + 미리보기를 반환한다
+- [x] **ANLZ-02**: POST /api/analyze 엔드포인트가 분포/상관/이상값/요약 분석 결과를 반환한다
+- [x] **ANLZ-03**: pandas 처리를 run_in_executor로 감싸 이벤트 루프 블로킹을 방지한다
+- [x] **ANLZ-04**: low_memory=False + 2차 타입 추론으로 혼합 타입 컬럼을 올바르게 처리한다
 
 ### Visualization
 
@@ -67,7 +67,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **TEST-01**: 모든 커스텀 훅에 대응하는 Vitest 테스트가 존재한다
 - [ ] **TEST-02**: ChartRouter 타입 분기 로직에 유닛 테스트가 존재한다
 - [ ] **TEST-03**: analysisApi에 MSW 기반 모킹 테스트가 존재한다
-- [ ] **TEST-04**: 백엔드 서비스에 pytest 테스트가 존재한다
+- [x] **TEST-04**: 백엔드 서비스에 pytest 테스트가 존재한다
 - [ ] **TEST-05**: 업로드 → 분석 → 차트 렌더링 통합 테스트가 존재한다
 
 ## v2 Requirements
@@ -106,14 +106,14 @@ Deferred to future release. Tracked but not in current roadmap.
 | INFRA-07 | Phase 1 | Complete |
 | UPLD-01 | Phase 2 | Pending |
 | UPLD-02 | Phase 2 | Pending |
-| UPLD-03 | Phase 2 | Pending |
+| UPLD-03 | Phase 2 | Complete |
 | UPLD-04 | Phase 2 | Pending |
-| UPLD-05 | Phase 2 | Pending |
+| UPLD-05 | Phase 2 | Complete |
 | UPLD-06 | Phase 2 | Pending |
-| ANLZ-01 | Phase 2 | Pending |
-| ANLZ-02 | Phase 2 | Pending |
-| ANLZ-03 | Phase 2 | Pending |
-| ANLZ-04 | Phase 2 | Pending |
+| ANLZ-01 | Phase 2 | Complete |
+| ANLZ-02 | Phase 2 | Complete |
+| ANLZ-03 | Phase 2 | Complete |
+| ANLZ-04 | Phase 2 | Complete |
 | VIZL-01 | Phase 3 | Pending |
 | VIZL-02 | Phase 3 | Pending |
 | VIZL-03 | Phase 3 | Pending |
@@ -134,7 +134,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | TEST-01 | Phase 2 | Pending |
 | TEST-02 | Phase 3 | Pending |
 | TEST-03 | Phase 2 | Pending |
-| TEST-04 | Phase 2 | Pending |
+| TEST-04 | Phase 2 | Complete |
 | TEST-05 | Phase 4 | Pending |
 
 **Coverage:**

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-27T12:12:23.956Z"
-last_activity: "2026-03-27 — Plan 01-02 complete: CI workflow + Vercel SPA config + deployment env stubs"
+stopped_at: "Completed 02-01-PLAN.md"
+last_updated: "2026-03-27T12:55:00Z"
+last_activity: "2026-03-27 — Plan 02-01 complete: FastAPI upload + analysis pipeline with 56 passing tests"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
-  percent: 25
+  total_plans: 3
+  completed_plans: 3
+  percent: 38
 ---
 
 # Project State
@@ -25,29 +25,30 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 ## Current Position
 
-Phase: 1 of 4 (Skeleton + Deploy) — COMPLETE
-Plan: 2 of 2 in phase (all plans done)
+Phase: 2 of 4 (Upload + API + State) — In Progress
+Plan: 1 of 2 in phase (plan 01 done)
 Status: In progress
-Last activity: 2026-03-27 — Plan 01-02 complete: CI workflow + Vercel SPA config + deployment env stubs
+Last activity: 2026-03-27 — Plan 02-01 complete: FastAPI upload + analysis pipeline with 56 passing tests
 
-Progress: [██░░░░░░░░] 25%
+Progress: [███░░░░░░░] 38%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
+- Total plans completed: 3
 - Average duration: 9 min
-- Total execution time: 0.3 hours
+- Total execution time: 0.45 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-skeleton-deploy | 2/2 | 18 min | 9 min |
+| 02-upload-api-state | 1/2 | 9 min | 9 min |
 
 **Recent Trend:**
-- Last 5 plans: 13 min, 5 min
-- Trend: accelerating
+- Last 5 plans: 13 min, 5 min, 9 min
+- Trend: consistent
 
 *Updated after each plan completion*
 
@@ -68,6 +69,10 @@ Recent decisions affecting current work:
 - [01-02]: vercel.json placed inside frontend/ (not repo root) — Vercel root directory is set to frontend/
 - [01-02]: ALLOWED_ORIGINS documented in .env.example for Render dashboard — never hardcoded in source
 - [01-02]: pytest.ini already existed from Plan 01 — no duplication needed in Plan 02
+- [02-01]: In-memory dict (_datasets) for dataset storage — sufficient for single-process Render free tier; no Redis/DB needed in v1
+- [02-01]: ThreadPoolExecutor(max_workers=2) at module level in analyze.py — avoids per-request executor creation overhead
+- [02-01]: preview uses df.where(notna, None).to_dict() pattern to safely serialize pandas NA as JSON null
+- [02-01]: pandas 3.x nullable dtype concern resolved — empirically validated with test fixtures, no issues
 
 ### Pending Todos
 
@@ -75,13 +80,13 @@ Recent decisions affecting current work:
 
 ### Blockers/Concerns
 
-- [Research]: pandas 3.x nullable dtype changes may affect `.describe()` output shape — validate empirically in Phase 2 with test CSV
 - [Research]: @nivo/heatmap 0.99 is pre-1.0 — verify color-scale and cell-click API against nivo storybook before Phase 3
 - [Resolved]: Tailwind CSS 4 `@theme` syntax — validated and working in Phase 1 scaffold
+- [Resolved]: pandas 3.x nullable dtype changes — empirically validated with sample.csv fixtures, 56 tests pass
 - [Pending]: Vercel + Render deployment not yet done — human action required before live URLs are verified
 
 ## Session Continuity
 
-Last session: 2026-03-27T12:12:23.953Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-upload-api-state/02-CONTEXT.md
+Last session: 2026-03-27T12:55:00Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-upload-api-state/02-01-SUMMARY.md
