@@ -45,11 +45,11 @@ Plans:
   3. Uploading a file larger than 10 MB shows a clear error message; uploading a second file completely clears the previous dataset state before loading the new one
   4. The analysis API returns stats, correlation, outliers, and quality alert data — visible in browser DevTools network tab — with no event-loop blocking for files up to 10 MB
   5. Every custom hook (`useUpload`, `useAnalysis`) has a passing Vitest test; every backend service (`parser_service`, `stats_service`, `correlation_service`, `outlier_service`) has a passing pytest test; `analysisApi` has MSW-mocked tests
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: FastAPI upload + analysis endpoints (parser_service, stats_service, correlation_service, outlier_service, run_in_executor, low_memory=False, 10MB limit, pytest coverage)
-- [ ] 02-02: Zustand store (3 slices + resetStore), axios API service layer, useUpload + useAnalysis hooks, DataTable with react-window, MSW mocks, Vitest hook tests
+- [ ] 02-01-PLAN.md — FastAPI upload + analysis endpoints (parser_service, stats_service, correlation_service, outlier_service, run_in_executor, pytest coverage)
+- [ ] 02-02-PLAN.md — Zustand store (3 slices + resetStore), API service layer, useUpload + useAnalysis hooks, DropZone, DataTable with react-window, MSW mocks, Vitest tests
 
 ### Phase 3: Visualization
 **Goal**: All analysis results from Phase 2 are rendered as interactive, correctly-typed chart components — histogram, bar chart, timeseries, correlation heatmap with scatter modal, outlier toggle, summary card, missing value visualization, and data quality alerts
