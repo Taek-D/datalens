@@ -1,0 +1,13 @@
+id,age,salary,category,created_at,description,score
+1,25,50000,A,2023-01-15,short text,1.0
+2,30,60000,B,2023-02-20,another description,2.0
+3,35,75000,A,2023-03-10,sample entry,3.0
+4,28,55000,C,2023-04-05,data row four,4.0
+5,42,90000,B,2023-05-18,data row five,5.0
+6,31,65000,A,2023-06-22,data row six,6.0
+7,27,52000,C,2023-07-30,data row seven,7.0
+8,38,80000,B,2023-08-14,data row eight,8.0
+9,33,70000,A,2023-09-01,data row nine,9.0
+10,999,200000,C,2023-10-25,outlier salary and age,10.0
+11,29,,A,2023-11-12,missing salary,11.0
+12,45,95000,B,2023-12-03,data row twelve,12.0

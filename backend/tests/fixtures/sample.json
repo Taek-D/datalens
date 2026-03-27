@@ -1,0 +1,14 @@
+[
+  {"id": 1, "age": 25, "salary": 50000, "category": "A", "created_at": "2023-01-15", "description": "short text", "score": 1.0},
+  {"id": 2, "age": 30, "salary": 60000, "category": "B", "created_at": "2023-02-20", "description": "another description", "score": 2.0},
+  {"id": 3, "age": 35, "salary": 75000, "category": "A", "created_at": "2023-03-10", "description": "sample entry", "score": 3.0},
+  {"id": 4, "age": 28, "salary": 55000, "category": "C", "created_at": "2023-04-05", "description": "data row four", "score": 4.0},
+  {"id": 5, "age": 42, "salary": 90000, "category": "B", "created_at": "2023-05-18", "description": "data row five", "score": 5.0},
+  {"id": 6, "age": 31, "salary": 65000, "category": "A", "created_at": "2023-06-22", "description": "data row six", "score": 6.0},
+  {"id": 7, "age": 27, "salary": 52000, "category": "C", "created_at": "2023-07-30", "description": "data row seven", "score": 7.0},
+  {"id": 8, "age": 38, "salary": 80000, "category": "B", "created_at": "2023-08-14", "description": "data row eight", "score": 8.0},
+  {"id": 9, "age": 33, "salary": 70000, "category": "A", "created_at": "2023-09-01", "description": "data row nine", "score": 9.0},
+  {"id": 10, "age": 999, "salary": 200000, "category": "C", "created_at": "2023-10-25", "description": "outlier salary and age", "score": 10.0},
+  {"id": 11, "age": 29, "salary": null, "category": "A", "created_at": "2023-11-12", "description": "missing salary", "score": 11.0},
+  {"id": 12, "age": 45, "salary": 95000, "category": "B", "created_at": "2023-12-03", "description": "data row twelve", "score": 12.0}
+]
