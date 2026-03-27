@@ -1,4 +1,4 @@
-import { StateCreator } from 'zustand';
+import type { StateCreator } from 'zustand';
 
 export type AppStatus = 'idle' | 'uploading' | 'analyzing' | 'done' | 'error';
 

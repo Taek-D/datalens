@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
-import { UploadResponse } from '../types/dataset';
-import { AnalysisResultResponse } from '../types/analysis';
+import type { UploadResponse } from '../types/dataset';
+import type { AnalysisResultResponse } from '../types/analysis';
 
 const mockUploadResponse: UploadResponse = {
   file_id: 'test1234',

@@ -1,7 +1,10 @@
 import { create } from 'zustand';
-import { DatasetSlice, createDatasetSlice } from './datasetSlice';
-import { AnalysisSlice, createAnalysisSlice } from './analysisSlice';
-import { UiSlice, createUiSlice } from './uiSlice';
+import type { DatasetSlice } from './datasetSlice';
+import { createDatasetSlice } from './datasetSlice';
+import type { AnalysisSlice } from './analysisSlice';
+import { createAnalysisSlice } from './analysisSlice';
+import type { UiSlice } from './uiSlice';
+import { createUiSlice } from './uiSlice';
 
 export type StoreState = DatasetSlice & AnalysisSlice & UiSlice & {
   resetStore: () => void;

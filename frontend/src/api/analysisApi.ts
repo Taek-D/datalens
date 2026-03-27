@@ -1,6 +1,6 @@
 import { apiClient } from './client';
-import { UploadResponse } from '../types/dataset';
-import { AnalysisResultResponse } from '../types/analysis';
+import type { UploadResponse } from '../types/dataset';
+import type { AnalysisResultResponse } from '../types/analysis';
 
 /**
  * Upload a CSV or JSON file to the backend.

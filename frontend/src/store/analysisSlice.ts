@@ -1,5 +1,5 @@
-import { StateCreator } from 'zustand';
-import { AnalysisResultResponse } from '../types/analysis';
+import type { StateCreator } from 'zustand';
+import type { AnalysisResultResponse } from '../types/analysis';
 
 export interface AnalysisSlice {
   analysisResult: AnalysisResultResponse | null;

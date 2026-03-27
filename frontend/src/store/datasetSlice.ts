@@ -1,5 +1,5 @@
-import { StateCreator } from 'zustand';
-import { ColumnMeta } from '../types/dataset';
+import type { StateCreator } from 'zustand';
+import type { ColumnMeta } from '../types/dataset';
 
 export interface DatasetSlice {
   rawData: Record<string, unknown>[];
