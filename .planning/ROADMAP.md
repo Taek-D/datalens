@@ -29,11 +29,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A pull request to `main` triggers GitHub Actions and shows green checks for both FE lint/test/build and BE pytest/lint
   4. The deployed Vercel URL serves the frontend and the deployed Render URL responds to `GET /health` — CORS allows the Vercel origin
   5. TypeScript interfaces in `frontend/src/types/` and Pydantic schemas in `backend/schemas/` define the same data shapes for upload response and analysis response
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Monorepo scaffold (Vite + FastAPI project structure, shared tooling, CORS env config, /health endpoint)
-- [ ] 01-02: Data contracts (TypeScript interfaces + Pydantic schemas aligned), CI pipeline (GitHub Actions FE + BE), Vercel + Render deployment
+- [ ] 01-01-PLAN.md — Frontend + backend scaffold (Vite, FastAPI, CORS, /health, Tailwind v4, pytest stubs, data contracts)
+- [ ] 01-02-PLAN.md — GitHub Actions CI pipeline + Vercel/Render deployment configuration
 
 ### Phase 2: Upload + API + State
 **Goal**: A user can upload a CSV or JSON file and the application parses it, runs all four analysis services, and stores the typed results in Zustand — with every hook and backend service covered by tests
