@@ -15,7 +15,8 @@ export interface ColumnMeta {
 
 export interface UploadResponse {
   columns: ColumnMeta[];
-  /** First 50 rows of raw data — values typed as unknown until Phase 2 */
+  /** First 50 rows of raw data */
   preview: Record<string, unknown>[];
   row_count: number;
+  file_id: string;
 }
