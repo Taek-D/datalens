@@ -17,6 +17,7 @@ class ColumnMeta(BaseModel):
 
 
 class UploadResponse(BaseModel):
+    file_id: str
     columns: list[ColumnMeta]
-    preview: list[dict]    # first 50 rows — typed further in Phase 2
+    preview: list[dict]    # first 50 rows
     row_count: int
