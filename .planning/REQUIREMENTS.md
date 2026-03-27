@@ -14,8 +14,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **INFRA-03**: TypeScript 인터페이스와 Pydantic 스키마 간 데이터 계약 정의
 - [x] **INFRA-04**: CORS 환경변수 기반 설정 (배포 환경별 origin 관리)
 - [x] **INFRA-05**: /health 엔드포인트 + 프론트엔드 워밍업 호출 (Render 콜드스타트 대응)
-- [ ] **INFRA-06**: GitHub Actions CI (PR마다 FE 테스트 + BE 테스트 + 빌드)
-- [ ] **INFRA-07**: Vercel (FE) + Render (BE) 배포 파이프라인
+- [x] **INFRA-06**: GitHub Actions CI (PR마다 FE 테스트 + BE 테스트 + 빌드)
+- [x] **INFRA-07**: Vercel (FE) + Render (BE) 배포 파이프라인
 
 ### Upload
 
@@ -97,13 +97,13 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
-| INFRA-03 | Phase 1 | Pending |
-| INFRA-04 | Phase 1 | Pending |
-| INFRA-05 | Phase 1 | Pending |
-| INFRA-06 | Phase 1 | Pending |
-| INFRA-07 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
+| INFRA-02 | Phase 1 | Complete |
+| INFRA-03 | Phase 1 | Complete |
+| INFRA-04 | Phase 1 | Complete |
+| INFRA-05 | Phase 1 | Complete |
+| INFRA-06 | Phase 1 | Complete |
+| INFRA-07 | Phase 1 | Complete |
 | UPLD-01 | Phase 2 | Pending |
 | UPLD-02 | Phase 2 | Pending |
 | UPLD-03 | Phase 2 | Pending |
@@ -144,4 +144,4 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-03-27*
-*Last updated: 2026-03-27 after roadmap assignment*
+*Last updated: 2026-03-27 after 01-02 completion (INFRA-01 through INFRA-07 all complete)*

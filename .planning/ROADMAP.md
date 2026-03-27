@@ -12,7 +12,7 @@ DataLens goes from empty repository to a deployed, portfolio-ready EDA platform 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Skeleton + Deploy** - Monorepo scaffold, data contracts, CI, and live deployment targets on Vercel + Render
+- [x] **Phase 1: Skeleton + Deploy** - Monorepo scaffold, data contracts, CI, and live deployment targets on Vercel + Render
 - [ ] **Phase 2: Upload + API + State** - End-to-end upload-to-analysis pipeline with backend services, Zustand store, hooks, and tests
 - [ ] **Phase 3: Visualization** - All chart surfaces, outlier panel, correlation heatmap, summary cards, and data quality alerts
 - [ ] **Phase 4: Polish + Edge Cases** - Full integration test, adversarial input hardening, UX polish, and demo-day verification
@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Frontend + backend scaffold (Vite, FastAPI, CORS, /health, Tailwind v4, pytest stubs, data contracts)
-- [ ] 01-02-PLAN.md — GitHub Actions CI pipeline + Vercel/Render deployment configuration
+- [x] 01-02-PLAN.md — GitHub Actions CI pipeline + Vercel/Render deployment configuration
 
 ### Phase 2: Upload + API + State
 **Goal**: A user can upload a CSV or JSON file and the application parses it, runs all four analysis services, and stores the typed results in Zustand — with every hook and backend service covered by tests
@@ -90,7 +90,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Skeleton + Deploy | 1/2 | In progress | - |
+| 1. Skeleton + Deploy | 2/2 | Complete | 2026-03-27 |
 | 2. Upload + API + State | 0/2 | Not started | - |
 | 3. Visualization | 0/2 | Not started | - |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |
