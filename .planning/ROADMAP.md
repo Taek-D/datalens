@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Frontend + backend scaffold (Vite, FastAPI, CORS, /health, Tailwind v4, pytest stubs, data contracts)
+- [x] 01-01-PLAN.md — Frontend + backend scaffold (Vite, FastAPI, CORS, /health, Tailwind v4, pytest stubs, data contracts)
 - [ ] 01-02-PLAN.md — GitHub Actions CI pipeline + Vercel/Render deployment configuration
 
 ### Phase 2: Upload + API + State
@@ -90,7 +90,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Skeleton + Deploy | 0/2 | Not started | - |
+| 1. Skeleton + Deploy | 1/2 | In progress | - |
 | 2. Upload + API + State | 0/2 | Not started | - |
 | 3. Visualization | 0/2 | Not started | - |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |

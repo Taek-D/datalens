@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 1 context gathered
-last_updated: "2026-03-27T09:40:44.243Z"
-last_activity: 2026-03-27 — Roadmap created, ready to plan Phase 1
+status: in_progress
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-03-27T10:20:00.000Z"
+last_activity: 2026-03-27 — Phase 1 Plan 1 complete (monorepo scaffold)
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_plans: 8
+  completed_plans: 1
+  percent: 12
 ---
 
 # Project State
@@ -26,28 +26,28 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 1 of 4 (Skeleton + Deploy)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-03-27 — Roadmap created, ready to plan Phase 1
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-03-27 — Plan 01-01 complete: monorepo scaffold (Vite + React + FastAPI)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 12%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: — min
-- Total execution time: — hours
+- Total plans completed: 1
+- Average duration: 13 min
+- Total execution time: 0.2 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01-skeleton-deploy | 1/2 | 13 min | 13 min |
 
 **Recent Trend:**
-- Last 5 plans: —
-- Trend: —
+- Last 5 plans: 13 min
+- Trend: establishing baseline
 
 *Updated after each plan completion*
 
@@ -62,6 +62,9 @@ Recent decisions affecting current work:
 - [Init]: Zustand 5 with 3 slices (datasetSlice, analysisSlice, uiSlice) + resetStore() action
 - [Init]: Two-endpoint API design — POST /api/upload (parse + column schema) then POST /api/analyze (all analysis services)
 - [Init]: Monorepo structure — frontend/ + backend/ in single repository
+- [01-01]: Use `defineConfig` from `vitest/config` (not `vite`) to allow `test` key in vite.config.ts without TS error
+- [01-01]: pytest-asyncio upgraded to 1.3.0 (0.25.3 conflicts with pytest 9); pytest.ini with asyncio_mode=auto required
+- [01-01]: passWithNoTests: true in vitest config so pnpm test exits 0 before any test files exist
 
 ### Pending Todos
 
@@ -69,12 +72,12 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Research]: Tailwind CSS 4 `@theme` syntax — validate against official docs during Phase 1 scaffold
 - [Research]: pandas 3.x nullable dtype changes may affect `.describe()` output shape — validate empirically in Phase 2 with test CSV
 - [Research]: @nivo/heatmap 0.99 is pre-1.0 — verify color-scale and cell-click API against nivo storybook before Phase 3
+- [Resolved]: Tailwind CSS 4 `@theme` syntax — validated and working in Phase 1 scaffold
 
 ## Session Continuity
 
-Last session: 2026-03-27T09:40:44.240Z
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-skeleton-deploy/01-CONTEXT.md
+Last session: 2026-03-27T10:20:00.000Z
+Stopped at: Completed 01-01-PLAN.md
+Resume file: .planning/phases/01-skeleton-deploy/01-02-PLAN.md

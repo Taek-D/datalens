@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Vite + React 18 + TypeScript 모노레포 프로젝트 구조 (frontend/ + backend/)
-- [ ] **INFRA-02**: FastAPI 백엔드 프로젝트 구조 (Pydantic 스키마 + 서비스 레이어)
-- [ ] **INFRA-03**: TypeScript 인터페이스와 Pydantic 스키마 간 데이터 계약 정의
-- [ ] **INFRA-04**: CORS 환경변수 기반 설정 (배포 환경별 origin 관리)
-- [ ] **INFRA-05**: /health 엔드포인트 + 프론트엔드 워밍업 호출 (Render 콜드스타트 대응)
+- [x] **INFRA-01**: Vite + React 18 + TypeScript 모노레포 프로젝트 구조 (frontend/ + backend/)
+- [x] **INFRA-02**: FastAPI 백엔드 프로젝트 구조 (Pydantic 스키마 + 서비스 레이어)
+- [x] **INFRA-03**: TypeScript 인터페이스와 Pydantic 스키마 간 데이터 계약 정의
+- [x] **INFRA-04**: CORS 환경변수 기반 설정 (배포 환경별 origin 관리)
+- [x] **INFRA-05**: /health 엔드포인트 + 프론트엔드 워밍업 호출 (Render 콜드스타트 대응)
 - [ ] **INFRA-06**: GitHub Actions CI (PR마다 FE 테스트 + BE 테스트 + 빌드)
 - [ ] **INFRA-07**: Vercel (FE) + Render (BE) 배포 파이프라인
 
