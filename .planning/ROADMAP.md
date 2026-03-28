@@ -62,11 +62,12 @@ Plans:
   4. The outlier panel lists each numeric column's IQR bounds and outlier count; toggling the outlier filter updates the affected charts and statistics in real time
   5. The summary card shows row count, column count, missing value ratio, and duplicate row count; data quality alerts flag constant columns, high-cardinality columns, high null ratio, and heavy skew
   6. `ChartRouter` type-dispatch logic has passing Vitest unit tests; chart components do not re-render on unrelated store updates (verified via React DevTools or test)
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Distribution charts (ChartRouter + CHART_MAP, HistogramChart, BarChart, TimeseriesChart, column focus, React.memo + useMemo, TEST-02)
-- [ ] 03-02: Correlation heatmap (@nivo/heatmap, scatter modal, server-side 2k downsampling), outlier panel (IQR display, toggle filter), summary card + missing value viz + quality alerts (SUMM-01~04, PERF-03)
+- [ ] 03-01-PLAN.md — Distribution charts (ChartRouter + CHART_MAP, HistogramChart, BarChart, TimeseriesChart, DistributionGrid 2-col layout, column focus, useChartData hook, showOutliers state, React.memo + useMemo, ChartRouter unit tests)
+- [ ] 03-02-PLAN.md — Summary card (4-stat grid), column stats table, quality alerts (severity banners), backend scatter endpoint with 2000-point downsampling
+- [ ] 03-03-PLAN.md — Correlation heatmap (@nivo/heatmap, cell click), scatter modal (Recharts ScatterChart), outlier panel (IQR table + global toggle), AnalysisView container, App.tsx wiring
 
 ### Phase 4: Polish + Edge Cases
 **Goal**: The full upload-to-visualization pipeline is verified end-to-end against adversarial inputs, edge cases produce graceful states rather than crashes, and the deployed demo reliably delivers the core value promise within 3 seconds
@@ -92,5 +93,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Skeleton + Deploy | 2/2 | Complete    | 2026-03-27 |
 | 2. Upload + API + State | 2/2 | Complete   | 2026-03-27 |
-| 3. Visualization | 0/2 | Not started | - |
+| 3. Visualization | 0/3 | Not started | - |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |
