@@ -22,6 +22,7 @@ const DATA_NAV: NavItem[] = [
 interface SidebarProps {
   onNewFile: () => void;
   fileName?: string;
+  status?: string;
 }
 
 function NavIcon({ path }: { path: string }) {
@@ -32,7 +33,7 @@ function NavIcon({ path }: { path: string }) {
   );
 }
 
-export const Sidebar = memo(function Sidebar({ onNewFile, fileName }: SidebarProps) {
+export const Sidebar = memo(function Sidebar({ onNewFile, fileName, status }: SidebarProps) {
   const [active, setActive] = useState('overview');
   const isClickScrolling = useRef(false);
 
@@ -59,7 +60,7 @@ export const Sidebar = memo(function Sidebar({ onNewFile, fileName }: SidebarPro
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [status]);
 
   const handleClick = useCallback((id: string) => {
     setActive(id);
