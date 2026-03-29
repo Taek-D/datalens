@@ -79,10 +79,10 @@ Plans:
   3. Uploading two sequential files in the integration test confirms the second upload starts from a fully reset state (no stale data from first file visible)
   4. `tsc --strict` reports zero errors and zero `any` types across the frontend codebase
   5. The deployed Render backend responds to `/health` within 5 seconds after a cold start; the frontend shows a "Connecting..." indicator and recovers automatically when the server warms up
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 04-01: Integration test (upload → analyze → render fixture), edge case handling (0/1 numeric columns, all-null columns, sequential upload state reset), tsc --strict zero-any audit, cold-start UX, friendly error message mapping
+- [ ] 04-01-PLAN.md — Integration test (upload -> analyze -> chart render pipeline, edge cases: 0/1 numeric columns + all-null column, sequential upload state reset, cold-start banner), tsc --strict zero-error audit
 
 ## Progress
 
