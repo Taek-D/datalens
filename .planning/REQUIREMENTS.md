@@ -35,10 +35,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Visualization
 
-- [ ] **VIZL-01**: 숫자형 컬럼에 히스토그램을 자동 렌더링한다
-- [ ] **VIZL-02**: 카테고리형 컬럼에 바차트를 자동 렌더링한다 (상위 20개)
-- [ ] **VIZL-03**: 날짜형 컬럼에 타임시리즈 라인차트를 자동 렌더링한다
-- [ ] **VIZL-04**: 컬럼 클릭 시 해당 차트로 포커스가 이동한다
+- [x] **VIZL-01**: 숫자형 컬럼에 히스토그램을 자동 렌더링한다
+- [x] **VIZL-02**: 카테고리형 컬럼에 바차트를 자동 렌더링한다 (상위 20개)
+- [x] **VIZL-03**: 날짜형 컬럼에 타임시리즈 라인차트를 자동 렌더링한다
+- [x] **VIZL-04**: 컬럼 클릭 시 해당 차트로 포커스가 이동한다
 - [ ] **VIZL-05**: 수치형 컬럼 간 Pearson 상관관계 히트맵을 표시한다 (@nivo/heatmap)
 - [ ] **VIZL-06**: 히트맵 셀 클릭 시 해당 두 컬럼의 산점도 모달을 표시한다
 - [ ] **VIZL-07**: 산점도 데이터는 서버에서 2,000개 이하로 다운샘플링한다
@@ -59,13 +59,13 @@ Requirements for initial release. Each maps to roadmap phases.
 ### State & Performance
 
 - [x] **PERF-01**: Zustand DatasetStore로 전역 상태를 관리한다 (3 슬라이스: dataset, analysis, ui)
-- [ ] **PERF-02**: React.memo + useMemo로 불필요한 차트 리렌더링을 방지한다
+- [x] **PERF-02**: React.memo + useMemo로 불필요한 차트 리렌더링을 방지한다
 - [ ] **PERF-03**: react-window로 대용량 데이터 테이블을 가상화한다
 
 ### Testing
 
 - [x] **TEST-01**: 모든 커스텀 훅에 대응하는 Vitest 테스트가 존재한다
-- [ ] **TEST-02**: ChartRouter 타입 분기 로직에 유닛 테스트가 존재한다
+- [x] **TEST-02**: ChartRouter 타입 분기 로직에 유닛 테스트가 존재한다
 - [x] **TEST-03**: analysisApi에 MSW 기반 모킹 테스트가 존재한다
 - [x] **TEST-04**: 백엔드 서비스에 pytest 테스트가 존재한다
 - [ ] **TEST-05**: 업로드 → 분석 → 차트 렌더링 통합 테스트가 존재한다
@@ -114,10 +114,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | ANLZ-02 | Phase 2 | Complete |
 | ANLZ-03 | Phase 2 | Complete |
 | ANLZ-04 | Phase 2 | Complete |
-| VIZL-01 | Phase 3 | Pending |
-| VIZL-02 | Phase 3 | Pending |
-| VIZL-03 | Phase 3 | Pending |
-| VIZL-04 | Phase 3 | Pending |
+| VIZL-01 | Phase 3 | Complete |
+| VIZL-02 | Phase 3 | Complete |
+| VIZL-03 | Phase 3 | Complete |
+| VIZL-04 | Phase 3 | Complete |
 | VIZL-05 | Phase 3 | Pending |
 | VIZL-06 | Phase 3 | Pending |
 | VIZL-07 | Phase 3 | Pending |
@@ -129,10 +129,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | SUMM-03 | Phase 3 | Pending |
 | SUMM-04 | Phase 3 | Pending |
 | PERF-01 | Phase 2 | Complete |
-| PERF-02 | Phase 3 | Pending |
+| PERF-02 | Phase 3 | Complete |
 | PERF-03 | Phase 3 | Pending |
 | TEST-01 | Phase 2 | Complete |
-| TEST-02 | Phase 3 | Pending |
+| TEST-02 | Phase 3 | Complete |
 | TEST-03 | Phase 2 | Complete |
 | TEST-04 | Phase 2 | Complete |
 | TEST-05 | Phase 4 | Pending |

@@ -93,5 +93,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Skeleton + Deploy | 2/2 | Complete    | 2026-03-27 |
 | 2. Upload + API + State | 2/2 | Complete   | 2026-03-27 |
-| 3. Visualization | 2/3 | In progress | - |
+| 3. Visualization | 2/3 | In Progress|  |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |
