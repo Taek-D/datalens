@@ -1,8 +1,8 @@
 # DataLens — Interactive Dataset Explorer
 
-CSV/JSON 파일을 드래그앤드롭하면 자동으로 분포, 상관관계, 이상값을 탐색하는 웹 기반 EDA(탐색적 데이터 분석) 플랫폼.
+> "네이버랩스 데이터 플랫폼 팀에서 자율주행 멀티모달 데이터를 탐색할 때, Jupyter 없이도 브라우저에서 즉시 EDA를 수행할 수 있는 도구가 있다면 어떨까?"라는 질문에서 시작했습니다.
 
-> **데이터 파일을 드롭하면 즉시 의미 있는 시각화와 인사이트를 자동으로 보여준다** — 별도 설정이나 코딩 없이.
+CSV/JSON 파일을 드래그앤드롭하면 자동으로 분포, 상관관계, 이상값을 탐색하는 웹 기반 EDA(탐색적 데이터 분석) 플랫폼.
 
 **Live Demo**: [datalens-tau.vercel.app](https://datalens-tau.vercel.app/)
 
