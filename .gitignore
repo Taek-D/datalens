@@ -18,3 +18,12 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Claude Code / OMC
+.omc/
+.playwright-mcp/
+frontend/.omc/
+backend/.omc/
+
+# Screenshots
+*.png
