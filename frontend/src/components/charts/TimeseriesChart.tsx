@@ -56,8 +56,8 @@ export const TimeseriesChart = memo(function TimeseriesChart({
         />
         <YAxis tick={{ fontSize: 10 }} width={35} />
         <Tooltip
-          formatter={(value: number) => [value, '건수']}
-          labelFormatter={(label: string) => formatDateKo(label)}
+          formatter={(value: unknown) => [Number(value), '건수']}
+          labelFormatter={(label: unknown) => formatDateKo(String(label))}
         />
         <Line
           type="monotone"

@@ -77,8 +77,6 @@ export const CorrelationHeatmap = React.memo(function CorrelationHeatmap({
       <ResponsiveHeatMap
         data={data}
         margin={{ top: 60, right: 60, bottom: 60, left: 90 }}
-        minValue={-1}
-        maxValue={1}
         colors={(cell) => correlationColor(cell.value)}
         enableLabels={true}
         label={(cell) =>
@@ -108,9 +106,8 @@ export const CorrelationHeatmap = React.memo(function CorrelationHeatmap({
         onClick={handleClick}
         animate={true}
         hoverTarget="cell"
-        cellOpacity={1}
-        cellBorderWidth={1}
-        cellBorderColor={{ theme: 'background' }}
+        borderWidth={1}
+        borderColor={{ theme: 'background' }}
       />
     </div>
   );

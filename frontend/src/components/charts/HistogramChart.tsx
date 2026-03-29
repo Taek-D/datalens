@@ -66,8 +66,8 @@ export const HistogramChart = memo(function HistogramChart({
         />
         <YAxis tick={{ fontSize: 10 }} width={35} />
         <Tooltip
-          formatter={(value: number) => [value, '빈도']}
-          labelFormatter={(label: string) => `구간: ${label}`}
+          formatter={(value: unknown) => [Number(value), '빈도']}
+          labelFormatter={(label: unknown) => `구간: ${String(label)}`}
         />
         <Bar dataKey="count" fill="#3b82f6" />
       </BarChart>

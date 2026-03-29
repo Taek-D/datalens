@@ -1,6 +1,6 @@
 import React from 'react';
-import { FixedSizeList } from 'react-window';
-import type { ListChildComponentProps } from 'react-window';
+import { List } from 'react-window';
+import type { RowComponentProps } from 'react-window';
 import { useStore } from '../../store';
 import type { OutlierResult } from '../../types/analysis';
 
@@ -8,12 +8,12 @@ const VIRTUALIZE_THRESHOLD = 50;
 const ROW_HEIGHT = 40;
 const VIRTUAL_LIST_HEIGHT = 400;
 
-interface OutlierRowData {
+interface OutlierRowProps {
   outliers: OutlierResult[];
 }
 
-function OutlierRow({ index, style, data }: ListChildComponentProps<OutlierRowData>) {
-  const outlier = data.outliers[index];
+function OutlierRow({ index, style, outliers }: RowComponentProps<OutlierRowProps>) {
+  const outlier = outliers[index];
   if (!outlier) return null;
   const isEven = index % 2 === 0;
   const rowClass = isEven ? 'bg-white' : 'bg-gray-50';
@@ -61,8 +61,6 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
     );
   }
 
-  const rowData: OutlierRowData = { outliers };
-
   return (
     <section>
       {/* Section header with toggle */}
@@ -106,15 +104,13 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
 
         {/* Table body */}
         {outliers.length > VIRTUALIZE_THRESHOLD ? (
-          <FixedSizeList
-            height={VIRTUAL_LIST_HEIGHT}
-            itemSize={ROW_HEIGHT}
-            itemCount={outliers.length}
-            itemData={rowData}
-            width="100%"
-          >
-            {OutlierRow}
-          </FixedSizeList>
+          <List
+            rowComponent={OutlierRow}
+            rowHeight={ROW_HEIGHT}
+            rowCount={outliers.length}
+            rowProps={{ outliers }}
+            style={{ height: VIRTUAL_LIST_HEIGHT, width: '100%' }}
+          />
         ) : (
           <div>
             {outliers.map((outlier, index) => {

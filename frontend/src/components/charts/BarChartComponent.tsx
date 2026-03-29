@@ -53,8 +53,8 @@ export const BarChartComponent = memo(function BarChartComponent({
         />
         <YAxis tick={{ fontSize: 10 }} width={35} />
         <Tooltip
-          formatter={(value: number) => [value, '빈도']}
-          labelFormatter={(label: string) => `범주: ${label}`}
+          formatter={(value: unknown) => [Number(value), '빈도']}
+          labelFormatter={(label: unknown) => `범주: ${String(label)}`}
         />
         <Bar dataKey="count" fill="#8b5cf6" />
       </BarChart>
