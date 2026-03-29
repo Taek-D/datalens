@@ -40,19 +40,19 @@ export function AnalysisView() {
       <QualityAlerts />
 
       {/* (c) 수치형 컬럼 기초통계 */}
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-border-light pt-6">
         <ColumnStatsTable />
       </div>
 
       {/* (d) 분포 차트 */}
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-border-light pt-6">
         <DistributionGrid />
       </div>
 
       {/* (e) 상관관계 히트맵 */}
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-border-light pt-6">
         <section>
-          <h2 className="text-lg font-semibold mb-3 text-gray-800">
+          <h2 className="text-lg font-semibold mb-3 text-text">
             상관관계 히트맵
           </h2>
           {correlation ? (
@@ -61,7 +61,7 @@ export function AnalysisView() {
               onCellClick={handleHeatmapCellClick}
             />
           ) : (
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-text-subtle">
               분석 결과를 불러오는 중입니다...
             </p>
           )}
@@ -69,7 +69,7 @@ export function AnalysisView() {
       </div>
 
       {/* (f) 이상값 패널 */}
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-border-light pt-6">
         <OutlierPanel />
       </div>
 

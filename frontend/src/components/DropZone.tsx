@@ -16,8 +16,8 @@ export function DropZone({ className = '' }: DropZoneProps) {
   const isUploading = status === 'uploading';
 
   const borderClass = isDragging
-    ? 'border-blue-500 bg-blue-50'
-    : 'border-gray-300 bg-white hover:border-gray-400';
+    ? 'border-primary bg-primary-light'
+    : 'border-border bg-surface-raised hover:border-primary-muted';
 
   return (
     <div
@@ -25,11 +25,13 @@ export function DropZone({ className = '' }: DropZoneProps) {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      role="region"
+      aria-label="파일 업로드 영역"
     >
       <div className="flex flex-col items-center gap-4">
         {/* Upload icon */}
         <svg
-          className="w-12 h-12 text-gray-400"
+          className="w-12 h-12 text-text-subtle"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -45,27 +47,27 @@ export function DropZone({ className = '' }: DropZoneProps) {
 
         {isUploading ? (
           <div className="w-full max-w-xs">
-            <p className="text-sm text-gray-600 mb-2 text-center">업로드 중...</p>
-            <div className="w-full bg-gray-200 rounded h-2">
+            <p className="text-sm text-text-muted mb-2 text-center">업로드 중...</p>
+            <div className="w-full bg-border-light rounded h-2 overflow-hidden">
               <div
-                className="bg-blue-500 h-2 rounded transition-all duration-200"
+                className="bg-primary h-2 rounded transition-all duration-200"
                 style={{ width: `${uploadProgress}%` }}
               />
             </div>
-            <p className="text-xs text-gray-400 mt-1 text-center">{uploadProgress}%</p>
+            <p className="text-xs text-text-subtle mt-1 text-center">{uploadProgress}%</p>
           </div>
         ) : (
           <>
             <div className="text-center">
-              <p className="text-base text-gray-700 font-medium">
+              <p className="text-base text-text font-medium">
                 CSV 또는 JSON 파일을 여기에 드래그하세요
               </p>
-              <p className="text-sm text-gray-400 mt-1">최대 10MB</p>
+              <p className="text-sm text-text-subtle mt-1">최대 10MB</p>
             </div>
 
             <button
               type="button"
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
+              className="text-sm text-primary hover:text-primary-hover font-medium underline underline-offset-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               onClick={() => inputRef.current?.click()}
             >
               또는 파일 선택
@@ -77,14 +79,15 @@ export function DropZone({ className = '' }: DropZoneProps) {
               accept=".csv,.json"
               className="hidden"
               onChange={handleFileSelect}
+              aria-label="CSV 또는 JSON 파일 선택"
             />
           </>
         )}
 
         {/* Error message */}
         {error && status === 'error' && (
-          <div className="w-full max-w-sm">
-            <p className="text-sm text-red-600 text-center bg-red-50 border border-red-200 rounded-lg px-4 py-2">
+          <div className="w-full max-w-sm" role="alert">
+            <p className="text-sm text-error text-center bg-error-light border border-error/20 rounded-lg px-4 py-2">
               {error}
             </p>
           </div>

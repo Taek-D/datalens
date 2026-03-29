@@ -53,7 +53,7 @@ export const CorrelationHeatmap = React.memo(function CorrelationHeatmap({
 }: CorrelationHeatmapProps) {
   if (matrix.columns.length < 2) {
     return (
-      <div className="flex items-center justify-center h-32 text-sm text-gray-500 bg-gray-50 rounded-lg border border-gray-200">
+      <div className="flex items-center justify-center h-32 text-sm text-text-muted bg-surface rounded-lg border border-border">
         상관관계 분석에는 2개 이상의 수치형 컬럼이 필요합니다.
       </div>
     );

@@ -9,17 +9,26 @@ interface StatCardProps {
 
 const StatCard = React.memo(function StatCard({ label, value, valueClassName }: StatCardProps) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4">
-      <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{label}</p>
-      <p className={`text-2xl font-bold ${valueClassName ?? 'text-gray-900'}`}>{value}</p>
+    <div className="bg-surface-raised border border-border rounded-lg p-4 hover:shadow-sm hover:border-primary/30 transition-all">
+      <p className="text-xs text-text-muted uppercase tracking-wide mb-1">{label}</p>
+      <p className={`text-2xl font-bold ${valueClassName ?? 'text-text'}`}>{value}</p>
     </div>
   );
 });
 
+function SkeletonCard() {
+  return (
+    <div className="bg-surface-raised border border-border rounded-lg p-4">
+      <div className="h-3 w-12 bg-border-light rounded animate-skeleton mb-2" />
+      <div className="h-7 w-16 bg-border-light rounded animate-skeleton" />
+    </div>
+  );
+}
+
 function getMissingRatioColor(ratio: number): string {
-  if (ratio < 0.05) return 'text-green-600';
-  if (ratio <= 0.2) return 'text-yellow-600';
-  return 'text-red-600';
+  if (ratio < 0.05) return 'text-success';
+  if (ratio <= 0.2) return 'text-warning';
+  return 'text-error';
 }
 
 export const SummaryCard = React.memo(function SummaryCard() {
@@ -28,13 +37,10 @@ export const SummaryCard = React.memo(function SummaryCard() {
   if (!analysisResult) {
     return (
       <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-3 text-gray-800">데이터 개요</h2>
+        <h2 className="text-lg font-semibold mb-3 text-text">데이터 개요</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {['행 수', '컬럼 수', '결측 비율', '중복 행'].map((label) => (
-            <div key={label} className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{label}</p>
-              <p className="text-2xl font-bold text-gray-300">-</p>
-            </div>
+          {[0, 1, 2, 3].map((i) => (
+            <SkeletonCard key={i} />
           ))}
         </div>
       </div>
@@ -47,7 +53,7 @@ export const SummaryCard = React.memo(function SummaryCard() {
 
   return (
     <div className="mb-6">
-      <h2 className="text-lg font-semibold mb-3 text-gray-800">데이터 개요</h2>
+      <h2 className="text-lg font-semibold mb-3 text-text">데이터 개요</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard label="행 수" value={row_count.toLocaleString()} />
         <StatCard label="컬럼 수" value={column_count.toLocaleString()} />

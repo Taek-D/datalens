@@ -62,7 +62,7 @@ export const TimeseriesChart = memo(function TimeseriesChart({
         <Line
           type="monotone"
           dataKey="count"
-          stroke="#10b981"
+          stroke="#00C73C"
           dot={false}
           strokeWidth={2}
         />

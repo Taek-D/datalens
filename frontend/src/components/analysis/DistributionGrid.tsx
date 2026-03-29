@@ -36,8 +36,8 @@ export const DistributionGrid = memo(function DistributionGrid() {
   if (columns.length === 0) {
     return (
       <section>
-        <h2 className="text-lg font-semibold mb-3 text-gray-800">분포 차트</h2>
-        <p className="text-sm text-gray-400">
+        <h2 className="text-lg font-semibold mb-3 text-text">분포 차트</h2>
+        <p className="text-sm text-text-subtle">
           데이터를 업로드하면 각 컬럼의 분포 차트가 여기에 표시됩니다.
         </p>
       </section>
@@ -46,7 +46,7 @@ export const DistributionGrid = memo(function DistributionGrid() {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold mb-3 text-gray-800">분포 차트</h2>
+      <h2 className="text-lg font-semibold mb-3 text-text">분포 차트</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {columns.map((col) => (
           <ColumnChartRow

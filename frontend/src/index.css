@@ -1,11 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: oklch(0.62 0.2 260);
-  --color-primary-light: oklch(0.72 0.15 260);
-  --color-surface: oklch(0.98 0 0);
-  --color-surface-raised: oklch(0.96 0 0);
-  --color-text: oklch(0.15 0 0);
-  --color-text-muted: oklch(0.45 0 0);
-  --font-sans: Inter, system-ui, sans-serif;
+  /* NAVER LABS Brand */
+  --color-primary: #00C73C;
+  --color-primary-hover: #00B336;
+  --color-primary-light: #E8F9ED;
+  --color-primary-muted: #A3E4B5;
+
+  /* Surface */
+  --color-surface: #FAFBFC;
+  --color-surface-raised: #FFFFFF;
+
+  /* Border */
+  --color-border: #E5E8EB;
+  --color-border-light: #F0F2F4;
+
+  /* Text */
+  --color-text: #1A1E23;
+  --color-text-muted: #6B7684;
+  --color-text-subtle: #8B95A1;
+
+  /* Semantic */
+  --color-success: #00C73C;
+  --color-warning: #FF9500;
+  --color-warning-light: #FFF8EC;
+  --color-error: #FF3B30;
+  --color-error-light: #FFF0EF;
+  --color-info: #007AFF;
+  --color-info-light: #EBF5FF;
+
+  /* Chart */
+  --color-chart-primary: #00C73C;
+  --color-chart-secondary: #00A32A;
+  --color-chart-accent: #6B7684;
+
+  /* Typography */
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* Skeleton animation */
+  --animate-skeleton: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

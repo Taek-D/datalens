@@ -16,19 +16,19 @@ function OutlierRow({ index, style, outliers }: RowComponentProps<OutlierRowProp
   const outlier = outliers[index];
   if (!outlier) return null;
   const isEven = index % 2 === 0;
-  const rowClass = isEven ? 'bg-white' : 'bg-gray-50';
+  const rowClass = isEven ? 'bg-surface-raised' : 'bg-surface';
   const countClass =
-    outlier.outlier_count > 0 ? 'text-red-600 font-medium' : 'text-green-600';
+    outlier.outlier_count > 0 ? 'text-error font-medium' : 'text-success';
 
   return (
     <div
       style={style}
-      className={`flex items-center ${rowClass} border-b border-gray-100`}
+      className={`flex items-center ${rowClass} border-b border-border-light transition-colors hover:bg-primary-light/40`}
     >
-      <span className="flex-1 px-3 py-2 text-sm text-gray-900 font-medium truncate">
+      <span className="flex-1 px-3 py-2 text-sm text-text font-medium truncate">
         {outlier.column}
       </span>
-      <span className="w-48 px-3 py-2 text-sm text-gray-700 text-right whitespace-nowrap">
+      <span className="w-48 px-3 py-2 text-sm text-text-muted text-right whitespace-nowrap">
         {outlier.lower_bound.toFixed(2)} ~ {outlier.upper_bound.toFixed(2)}
       </span>
       <span className={`w-24 px-3 py-2 text-sm text-right ${countClass}`}>
@@ -46,8 +46,8 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
   if (!outliers) {
     return (
       <section>
-        <h2 className="text-lg font-semibold mb-3 text-gray-800">이상값 분석</h2>
-        <p className="text-sm text-gray-400">분석 결과를 불러오는 중입니다...</p>
+        <h2 className="text-lg font-semibold mb-3 text-text">이상값 분석</h2>
+        <p className="text-sm text-text-subtle">분석 결과를 불러오는 중입니다...</p>
       </section>
     );
   }
@@ -55,8 +55,8 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
   if (outliers.length === 0) {
     return (
       <section>
-        <h2 className="text-lg font-semibold mb-3 text-gray-800">이상값 분석</h2>
-        <p className="text-sm text-gray-400">수치형 컬럼이 없습니다.</p>
+        <h2 className="text-lg font-semibold mb-3 text-text">이상값 분석</h2>
+        <p className="text-sm text-text-subtle">수치형 컬럼이 없습니다.</p>
       </section>
     );
   }
@@ -65,39 +65,41 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
     <section>
       {/* Section header with toggle */}
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-lg font-semibold text-gray-800">이상값 분석</h2>
-        <button
-          type="button"
-          onClick={() => setShowOutliers(!showOutliers)}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-            showOutliers ? 'bg-indigo-600' : 'bg-gray-300'
-          }`}
-          role="switch"
-          aria-checked={showOutliers}
-          aria-label={showOutliers ? '이상값 포함' : '이상값 제외'}
-        >
-          <span
-            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-              showOutliers ? 'translate-x-6' : 'translate-x-1'
+        <h2 className="text-lg font-semibold text-text">이상값 분석</h2>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowOutliers(!showOutliers)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+              showOutliers ? 'bg-primary' : 'bg-gray-300'
             }`}
-          />
-        </button>
-        <span className="ml-2 text-sm text-gray-600">
-          {showOutliers ? '이상값 포함' : '이상값 제외'}
-        </span>
+            role="switch"
+            aria-checked={showOutliers}
+            aria-label={showOutliers ? '이상값 포함' : '이상값 제외'}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                showOutliers ? 'translate-x-6' : 'translate-x-1'
+              }`}
+            />
+          </button>
+          <span className="text-sm text-text-muted">
+            {showOutliers ? '이상값 포함' : '이상값 제외'}
+          </span>
+        </div>
       </div>
 
       {/* Table */}
-      <div className="border border-gray-200 rounded-lg overflow-hidden">
+      <div className="border border-border rounded-lg overflow-hidden">
         {/* Table header */}
-        <div className="flex items-center bg-gray-50 border-b border-gray-200">
-          <span className="flex-1 px-3 py-2 text-sm font-semibold text-gray-700">
+        <div className="flex items-center bg-surface border-b border-border">
+          <span className="flex-1 px-3 py-2 text-sm font-semibold text-text">
             컬럼명
           </span>
-          <span className="w-48 px-3 py-2 text-sm font-semibold text-gray-700 text-right">
+          <span className="w-48 px-3 py-2 text-sm font-semibold text-text text-right">
             IQR 범위
           </span>
-          <span className="w-24 px-3 py-2 text-sm font-semibold text-gray-700 text-right">
+          <span className="w-24 px-3 py-2 text-sm font-semibold text-text text-right">
             이상값 수
           </span>
         </div>
@@ -115,20 +117,20 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
           <div>
             {outliers.map((outlier, index) => {
               const isEven = index % 2 === 0;
-              const rowClass = isEven ? 'bg-white' : 'bg-gray-50';
+              const rowClass = isEven ? 'bg-surface-raised' : 'bg-surface';
               const countClass =
                 outlier.outlier_count > 0
-                  ? 'text-red-600 font-medium'
-                  : 'text-green-600';
+                  ? 'text-error font-medium'
+                  : 'text-success';
               return (
                 <div
                   key={outlier.column}
-                  className={`flex items-center ${rowClass} border-b border-gray-100 last:border-b-0`}
+                  className={`flex items-center ${rowClass} border-b border-border-light last:border-b-0 transition-colors hover:bg-primary-light/40`}
                 >
-                  <span className="flex-1 px-3 py-2 text-sm text-gray-900 font-medium truncate">
+                  <span className="flex-1 px-3 py-2 text-sm text-text font-medium truncate">
                     {outlier.column}
                   </span>
-                  <span className="w-48 px-3 py-2 text-sm text-gray-700 text-right whitespace-nowrap">
+                  <span className="w-48 px-3 py-2 text-sm text-text-muted text-right whitespace-nowrap">
                     {outlier.lower_bound.toFixed(2)} ~{' '}
                     {outlier.upper_bound.toFixed(2)}
                   </span>

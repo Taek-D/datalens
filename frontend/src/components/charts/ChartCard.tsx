@@ -9,10 +9,10 @@ interface ChartCardProps {
 }
 
 const TYPE_BADGE_CLASS: Record<ColumnType, string> = {
-  numeric: 'bg-blue-100 text-blue-700',
-  categorical: 'bg-purple-100 text-purple-700',
-  datetime: 'bg-green-100 text-green-700',
-  text: 'bg-gray-100 text-gray-700',
+  numeric: 'bg-primary-light text-primary-hover',
+  categorical: 'bg-slate-50 text-slate-600',
+  datetime: 'bg-sky-50 text-sky-700',
+  text: 'bg-border-light text-text-muted',
 };
 
 const TYPE_LABEL: Record<ColumnType, string> = {
@@ -32,15 +32,16 @@ export const ChartCard = memo(function ChartCard({
   return (
     <div
       id={`chart-${column.name}`}
-      className="bg-white border border-gray-200 rounded-lg overflow-hidden h-[300px] flex flex-col"
+      className="bg-surface-raised border border-border rounded-lg overflow-hidden h-[300px] flex flex-col hover:shadow-sm hover:border-primary/30 transition-all"
     >
       {/* Header */}
       <button
         type="button"
-        className="flex items-center gap-2 px-3 py-2 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors text-left w-full"
+        className="flex items-center gap-2 px-3 py-2 border-b border-border-light cursor-pointer hover:bg-surface transition-colors text-left w-full focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
         onClick={() => onFocus?.(column.name)}
+        aria-label={`${column.name} 차트로 이동`}
       >
-        <span className="font-semibold text-sm text-gray-800 truncate flex-1">
+        <span className="font-semibold text-sm text-text truncate flex-1">
           {column.name}
         </span>
         <span

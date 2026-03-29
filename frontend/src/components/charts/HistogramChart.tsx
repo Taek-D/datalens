@@ -69,7 +69,7 @@ export const HistogramChart = memo(function HistogramChart({
           formatter={(value: unknown) => [Number(value), '빈도']}
           labelFormatter={(label: unknown) => `구간: ${String(label)}`}
         />
-        <Bar dataKey="count" fill="#3b82f6" />
+        <Bar dataKey="count" fill="#00C73C" />
       </BarChart>
     </ResponsiveContainer>
   );

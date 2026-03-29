@@ -39,11 +39,12 @@ describe('SummaryCard', () => {
     expect(screen.getByText('12.0%')).toBeDefined();
   });
 
-  it('renders fallback dashes when analysisResult is null', () => {
+  it('renders skeleton placeholders when analysisResult is null', () => {
     // store is reset to null in beforeEach
-    render(<SummaryCard />);
+    const { container } = render(<SummaryCard />);
 
-    const dashes = screen.getAllByText('-');
-    expect(dashes.length).toBe(4);
+    const skeletons = container.querySelectorAll('.animate-skeleton');
+    // 4 cards × 2 skeleton bars each (label + value)
+    expect(skeletons.length).toBe(8);
   });
 });

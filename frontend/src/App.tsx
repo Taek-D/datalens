@@ -49,7 +49,6 @@ function App() {
         return <DropZone />;
 
       case 'uploading':
-        // DropZone shows internal progress bar when status === 'uploading'
         return <DropZone />;
 
       case 'analyzing':
@@ -72,17 +71,15 @@ function App() {
 
       case 'error':
         if (rawData.length === 0) {
-          // Upload failed — show DropZone to retry from scratch
           return <DropZone />;
         }
-        // Analysis failed — show data table + error banner + retry
         return (
           <div className="flex flex-col gap-4">
-            <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 flex items-center justify-between gap-4">
-              <p className="text-sm text-red-700">{error ?? '분석 중 오류가 발생했습니다.'}</p>
+            <div className="bg-error-light border border-error/20 rounded-lg px-4 py-3 flex items-center justify-between gap-4" role="alert">
+              <p className="text-sm text-error">{error ?? '분석 중 오류가 발생했습니다.'}</p>
               <button
                 type="button"
-                className="text-sm font-medium text-red-700 underline underline-offset-2 hover:text-red-800 flex-shrink-0"
+                className="text-sm font-medium text-error underline underline-offset-2 hover:text-error/80 flex-shrink-0 transition-colors"
                 onClick={retryAnalysis}
               >
                 다시 시도
@@ -102,12 +99,12 @@ function App() {
   return (
     <>
       {serverStatus === 'warming' && (
-        <div className="fixed top-0 inset-x-0 bg-amber-50 text-amber-800 text-sm text-center py-2 z-50">
+        <div className="fixed top-0 inset-x-0 bg-warning-light text-amber-800 text-sm text-center py-2 z-50" role="alert">
           분석 서버에 연결 중... (최대 60초 소요될 수 있습니다)
         </div>
       )}
       <main className="min-h-screen bg-surface text-text font-sans">
-        <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-primary">DataLens</h1>
@@ -116,7 +113,7 @@ function App() {
             {showNewFileButton && (
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                className="px-4 py-2 text-sm font-medium border border-border rounded-lg text-text-muted hover:bg-surface hover:border-primary/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 onClick={resetStore}
               >
                 새 파일 업로드

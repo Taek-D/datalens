@@ -56,7 +56,7 @@ export const BarChartComponent = memo(function BarChartComponent({
           formatter={(value: unknown) => [Number(value), '빈도']}
           labelFormatter={(label: unknown) => `범주: ${String(label)}`}
         />
-        <Bar dataKey="count" fill="#8b5cf6" />
+        <Bar dataKey="count" fill="#00A32A" />
       </BarChart>
     </ResponsiveContainer>
   );

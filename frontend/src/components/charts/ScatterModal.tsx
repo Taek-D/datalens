@@ -92,19 +92,19 @@ export function ScatterModal({
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
-      aria-label={`${colX} vs ${colY} scatter plot`}
+      aria-label={`${colX} vs ${colY} 산점도`}
     >
       <div
-        className="bg-white rounded-xl p-6 w-[560px] max-w-[90vw]"
+        className="bg-surface-raised rounded-xl p-6 w-[560px] max-w-[90vw] shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h3 className="font-semibold text-gray-900">
+            <h3 className="font-semibold text-text">
               {colX} vs {colY}
             </h3>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs text-text-muted mt-0.5">
               Pearson r = {correlationValue.toFixed(3)}
               {!loading && !error && (
                 <span className="ml-2">
@@ -115,9 +115,9 @@ export function ScatterModal({
           </div>
           <button
             type="button"
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1 -mt-1 -mr-1"
+            className="text-text-subtle hover:text-text transition-colors p-1 -mt-1 -mr-1 rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             onClick={onClose}
-            aria-label="Close"
+            aria-label="닫기"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -137,13 +137,13 @@ export function ScatterModal({
         {/* Content */}
         {loading && (
           <div className="flex items-center justify-center h-[300px]">
-            <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         )}
 
         {!loading && error && (
           <div className="flex items-center justify-center h-[300px]">
-            <p className="text-sm text-red-600">{error}</p>
+            <p className="text-sm text-error">{error}</p>
           </div>
         )}
 
@@ -153,7 +153,7 @@ export function ScatterModal({
               <XAxis dataKey="x" name={colX} type="number" />
               <YAxis dataKey="y" name={colY} type="number" />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={points} fill="#6366f1" opacity={0.6} />
+              <Scatter data={points} fill="#00C73C" opacity={0.6} />
             </ScatterChart>
           </ResponsiveContainer>
         )}
