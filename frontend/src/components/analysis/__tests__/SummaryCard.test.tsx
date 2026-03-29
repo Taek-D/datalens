@@ -44,7 +44,7 @@ describe('SummaryCard', () => {
     const { container } = render(<SummaryCard />);
 
     const skeletons = container.querySelectorAll('.animate-skeleton');
-    // 4 cards × 2 skeleton bars each (label + value)
-    expect(skeletons.length).toBe(8);
+    // 4 cards × 4 skeleton elements each (label, value, circle, description)
+    expect(skeletons.length).toBe(16);
   });
 });

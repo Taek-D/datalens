@@ -73,7 +73,8 @@ export function useUpload() {
         response.preview,
         response.columns,
         response.row_count,
-        response.file_id
+        response.file_id,
+        file.name
       );
       // Transition to analyzing — useAnalysis hook will auto-trigger
       useStore.getState().setStatus('analyzing');

@@ -6,11 +6,13 @@ export interface DatasetSlice {
   columns: ColumnMeta[];
   rowCount: number;
   fileId: string | null;
+  fileName: string | null;
   setDataset: (
     data: Record<string, unknown>[],
     columns: ColumnMeta[],
     rowCount: number,
-    fileId: string
+    fileId: string,
+    fileName?: string
   ) => void;
 }
 
@@ -19,6 +21,7 @@ export const createDatasetSlice: StateCreator<DatasetSlice> = (set) => ({
   columns: [],
   rowCount: 0,
   fileId: null,
-  setDataset: (data, columns, rowCount, fileId) =>
-    set({ rawData: data, columns, rowCount, fileId }),
+  fileName: null,
+  setDataset: (data, columns, rowCount, fileId, fileName) =>
+    set({ rawData: data, columns, rowCount, fileId, fileName: fileName ?? null }),
 });

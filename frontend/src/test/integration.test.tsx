@@ -173,7 +173,7 @@ describe('Integration: upload → analyze → render pipeline', () => {
     triggerFileUpload();
 
     await waitFor(
-      () => expect(screen.getByText('데이터 개요')).toBeInTheDocument(),
+      () => expect(screen.getByText('행 수')).toBeInTheDocument(),
       { timeout: 8000 },
     );
 
@@ -221,7 +221,7 @@ describe('Integration: upload → analyze → render pipeline', () => {
     triggerFileUpload();
 
     await waitFor(
-      () => expect(screen.getByText('데이터 개요')).toBeInTheDocument(),
+      () => expect(screen.getByText('행 수')).toBeInTheDocument(),
       { timeout: 8000 },
     );
 
@@ -244,7 +244,7 @@ describe('Integration: upload → analyze → render pipeline', () => {
     triggerFileUpload();
 
     await waitFor(
-      () => expect(screen.getByText('데이터 개요')).toBeInTheDocument(),
+      () => expect(screen.getByText('행 수')).toBeInTheDocument(),
       { timeout: 8000 },
     );
 
@@ -280,7 +280,7 @@ describe('Integration: upload → analyze → render pipeline', () => {
     triggerFileUpload();
 
     await waitFor(
-      () => expect(screen.getByText('데이터 개요')).toBeInTheDocument(),
+      () => expect(screen.getByText('행 수')).toBeInTheDocument(),
       { timeout: 8000 },
     );
 
@@ -295,7 +295,7 @@ describe('Integration: upload → analyze → render pipeline', () => {
     // First upload — default mock: row_count=100
     triggerFileUpload();
     await waitFor(
-      () => expect(screen.getByText('데이터 개요')).toBeInTheDocument(),
+      () => expect(screen.getByText('행 수')).toBeInTheDocument(),
       { timeout: 8000 },
     );
 
@@ -354,7 +354,7 @@ describe('Integration: upload → analyze → render pipeline', () => {
     triggerFileUpload(new File(['value\n10'], 'second.csv', { type: 'text/csv' }));
 
     await waitFor(
-      () => expect(screen.getByText('데이터 개요')).toBeInTheDocument(),
+      () => expect(screen.getByText('행 수')).toBeInTheDocument(),
       { timeout: 8000 },
     );
 

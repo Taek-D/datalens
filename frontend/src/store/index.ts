@@ -15,6 +15,7 @@ const initialState = {
   columns: [],
   rowCount: 0,
   fileId: null,
+  fileName: null,
   analysisResult: null,
   status: 'idle' as const,
   error: null,
