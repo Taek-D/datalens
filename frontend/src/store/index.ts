@@ -19,6 +19,7 @@ const initialState = {
   status: 'idle' as const,
   error: null,
   analysisStep: null,
+  showOutliers: true,
 };
 
 export const useStore = create<StoreState>()((...args) => ({
