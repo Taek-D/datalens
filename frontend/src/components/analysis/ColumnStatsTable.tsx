@@ -1,0 +1,79 @@
+import React from 'react';
+import { useStore } from '../../store';
+import type { SummaryStats } from '../../types/analysis';
+
+function fmt(value: number | null): string {
+  if (value === null || value === undefined) return '-';
+  return value.toFixed(2);
+}
+
+interface RowProps {
+  columnName: string;
+  stats: SummaryStats;
+  isEven: boolean;
+}
+
+const StatsRow = React.memo(function StatsRow({ columnName, stats, isEven }: RowProps) {
+  const rowClass = isEven ? 'bg-white' : 'bg-gray-50';
+  return (
+    <tr className={rowClass}>
+      <td className="px-3 py-2 font-medium text-gray-900 whitespace-nowrap">{columnName}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.mean)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.std)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.min)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.max)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.q1)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.median)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.q3)}</td>
+      <td className="px-3 py-2 text-right text-gray-700">{fmt(stats.skewness)}</td>
+    </tr>
+  );
+});
+
+export const ColumnStatsTable = React.memo(function ColumnStatsTable() {
+  const summary = useStore((s) => s.analysisResult?.summary);
+
+  if (!summary || Object.keys(summary).length === 0) {
+    return (
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-3 text-gray-800">컬럼별 통계</h2>
+        <p className="text-sm text-gray-500">수치형 컬럼이 없습니다.</p>
+      </div>
+    );
+  }
+
+  const entries = Object.entries(summary);
+
+  return (
+    <div className="mb-6">
+      <h2 className="text-lg font-semibold mb-3 text-gray-800">컬럼별 통계</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-gray-50 text-left">
+              <th className="px-3 py-2 font-semibold text-gray-700">컬럼명</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">평균</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">표준편차</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">최소</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">최대</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">Q1</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">중앙값</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">Q3</th>
+              <th className="px-3 py-2 font-semibold text-gray-700 text-right">왜도</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map(([colName, stats], index) => (
+              <StatsRow
+                key={colName}
+                columnName={colName}
+                stats={stats}
+                isEven={index % 2 === 0}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+});
