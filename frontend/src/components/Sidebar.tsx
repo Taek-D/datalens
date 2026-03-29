@@ -23,6 +23,8 @@ interface SidebarProps {
   onNewFile: () => void;
   fileName?: string;
   status?: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 function NavIcon({ path }: { path: string }) {
@@ -33,14 +35,14 @@ function NavIcon({ path }: { path: string }) {
   );
 }
 
-export const Sidebar = memo(function Sidebar({ onNewFile, fileName, status }: SidebarProps) {
+export const Sidebar = memo(function Sidebar({ onNewFile, fileName, status, isOpen, onClose }: SidebarProps) {
   const [active, setActive] = useState('overview');
   const isClickScrolling = useRef(false);
 
   // Scroll spy: track which section is visible
   useEffect(() => {
-    const allIds = [...ANALYSIS_NAV, ...DATA_NAV].map((item) => item.id);
     if (typeof IntersectionObserver === 'undefined') return;
+    const allIds = [...ANALYSIS_NAV, ...DATA_NAV].map((item) => item.id);
     const observer = new IntersectionObserver(
       (entries) => {
         if (isClickScrolling.current) return;
@@ -66,9 +68,9 @@ export const Sidebar = memo(function Sidebar({ onNewFile, fileName, status }: Si
     setActive(id);
     isClickScrolling.current = true;
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Re-enable scroll spy after scroll animation completes
     setTimeout(() => { isClickScrolling.current = false; }, 800);
-  }, []);
+    onClose(); // Close sidebar on mobile after navigation
+  }, [onClose]);
 
   const linkClass = (id: string) =>
     `w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary ${
@@ -78,64 +80,80 @@ export const Sidebar = memo(function Sidebar({ onNewFile, fileName, status }: Si
     }`;
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-60 bg-surface-raised border-r border-border flex flex-col z-40" aria-label="사이드바 내비게이션">
-      {/* Brand */}
-      <div className="px-5 pt-6 pb-4 border-b border-border-light">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+    <>
+      {/* Backdrop — mobile only */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden animate-fade-in"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        className={`fixed left-0 top-0 bottom-0 w-60 bg-surface-raised border-r border-border flex flex-col z-40 transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0`}
+        aria-label="사이드바 내비게이션"
+      >
+        {/* Brand */}
+        <div className="px-5 pt-6 pb-4 border-b border-border-light">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-base font-bold text-text">DataLens</h1>
+              <p className="text-xs text-text-subtle leading-tight">Dataset Explorer</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 px-3 py-4 overflow-y-auto sidebar-scroll">
+          <p className="text-xs font-semibold text-text-subtle uppercase tracking-wider px-3 mb-2">분석</p>
+          <div className="flex flex-col gap-0.5">
+            {ANALYSIS_NAV.map((item) => (
+              <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)} aria-current={active === item.id ? 'true' : undefined}>
+                <NavIcon path={item.path} />
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <p className="text-xs font-semibold text-text-subtle uppercase tracking-wider px-3 mt-5 mb-2">데이터</p>
+          <div className="flex flex-col gap-0.5">
+            {DATA_NAV.map((item) => (
+              <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)} aria-current={active === item.id ? 'true' : undefined}>
+                <NavIcon path={item.path} />
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        {/* Bottom */}
+        <div className="px-3 pb-4 border-t border-border-light pt-3 space-y-2">
+          {fileName && (
+            <div className="px-3 py-2.5 bg-surface rounded-lg">
+              <p className="text-xs text-text-subtle uppercase tracking-wider">현재 파일</p>
+              <p className="text-sm text-text font-medium truncate mt-0.5">{fileName}</p>
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={onNewFile}
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98] transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-          </div>
-          <div>
-            <h1 className="text-base font-bold text-text">DataLens</h1>
-            <p className="text-[11px] text-text-subtle leading-tight">Dataset Explorer</p>
-          </div>
+            새 파일 업로드
+          </button>
         </div>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 overflow-y-auto sidebar-scroll">
-        <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wider px-3 mb-2">분석</p>
-        <div className="flex flex-col gap-0.5">
-          {ANALYSIS_NAV.map((item) => (
-            <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)} aria-current={active === item.id ? 'true' : undefined}>
-              <NavIcon path={item.path} />
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wider px-3 mt-5 mb-2">데이터</p>
-        <div className="flex flex-col gap-0.5">
-          {DATA_NAV.map((item) => (
-            <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)} aria-current={active === item.id ? 'true' : undefined}>
-              <NavIcon path={item.path} />
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </nav>
-
-      {/* Bottom */}
-      <div className="px-3 pb-4 border-t border-border-light pt-3 space-y-2">
-        {fileName && (
-          <div className="px-3 py-2.5 bg-surface rounded-lg">
-            <p className="text-[11px] text-text-subtle uppercase tracking-wider">현재 파일</p>
-            <p className="text-sm text-text font-medium truncate mt-0.5">{fileName}</p>
-          </div>
-        )}
-        <button
-          type="button"
-          onClick={onNewFile}
-          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-          새 파일 업로드
-        </button>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 });

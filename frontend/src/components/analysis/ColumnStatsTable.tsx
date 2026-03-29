@@ -33,7 +33,28 @@ const StatsRow = React.memo(function StatsRow({ columnName, stats, isEven }: Row
 export const ColumnStatsTable = React.memo(function ColumnStatsTable() {
   const summary = useStore((s) => s.analysisResult?.summary);
 
-  if (!summary || Object.keys(summary).length === 0) {
+  if (!summary) {
+    return (
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-3 text-text">컬럼별 통계</h2>
+        <div className="border border-border rounded-lg overflow-hidden">
+          <div className="bg-surface px-3 py-2">
+            <div className="h-4 w-20 bg-border-light rounded animate-skeleton" />
+          </div>
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="flex gap-4 px-3 py-3 border-t border-border-light">
+              <div className="h-3 w-16 bg-border-light rounded animate-skeleton" />
+              <div className="h-3 w-12 bg-border-light rounded animate-skeleton" />
+              <div className="h-3 w-12 bg-border-light rounded animate-skeleton" />
+              <div className="h-3 w-12 bg-border-light rounded animate-skeleton" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (Object.keys(summary).length === 0) {
     return (
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-3 text-text">컬럼별 통계</h2>

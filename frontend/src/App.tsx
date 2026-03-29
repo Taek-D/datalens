@@ -15,6 +15,7 @@ type ServerStatus = 'idle' | 'warming' | 'ready' | 'error';
 
 function App() {
   const [serverStatus, setServerStatus] = useState<ServerStatus>('idle');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const status = useStore((s) => s.status);
   const rawData = useStore((s) => s.rawData);
@@ -71,7 +72,7 @@ function App() {
             <DropZone />
 
             {/* Features */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
               {[
                 { label: '분포 분석', desc: '히스토그램 · 바차트' },
                 { label: '상관관계', desc: 'Pearson 히트맵' },
@@ -98,26 +99,45 @@ function App() {
         </div>
       )}
 
-      <Sidebar onNewFile={resetStore} fileName={fileName ?? undefined} status={status} />
-
       {/* Skip link */}
       <a href="#dashboard-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-64 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         콘텐츠로 건너뛰기
       </a>
 
-      <main className="ml-60 min-h-screen" id="dashboard-content">
+      <Sidebar
+        onNewFile={resetStore}
+        fileName={fileName ?? undefined}
+        status={status}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      <main className="lg:ml-60 min-h-screen" id="dashboard-content">
         {/* Dashboard Header */}
-        <header className="sticky top-0 z-30 bg-surface-raised/80 backdrop-blur-sm border-b border-border-light px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-bold text-text">대시보드</h2>
-              <p className="text-sm text-text-muted mt-0.5">
-                {status === 'analyzing' ? '데이터를 분석하고 있습니다...' : '데이터 분석 결과를 확인하세요'}
-              </p>
-            </div>
+        <header className="sticky top-0 z-30 bg-surface-raised/80 backdrop-blur-sm border-b border-border-light px-4 sm:px-8 py-4">
+          <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
+              {/* Hamburger — mobile only */}
+              <button
+                type="button"
+                className="lg:hidden p-2 -ml-2 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-colors"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="메뉴 열기"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              </button>
+              <div>
+                <h2 className="text-xl font-bold text-text">대시보드</h2>
+                <p className="text-sm text-text-muted mt-0.5 hidden sm:block">
+                  {status === 'analyzing' ? '데이터를 분석하고 있습니다...' : '데이터 분석 결과를 확인하세요'}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-3">
               {fileName && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-light text-primary text-sm font-medium rounded-full">
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-light text-primary text-sm font-medium rounded-full">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                   </svg>
@@ -126,7 +146,7 @@ function App() {
               )}
               <button
                 type="button"
-                className="px-4 py-2 text-sm font-medium border border-border rounded-lg text-text-muted hover:bg-surface hover:border-primary/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="px-3 sm:px-4 py-2 text-sm font-medium border border-border rounded-lg text-text-muted hover:bg-surface hover:border-primary/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 onClick={resetStore}
               >
                 새 파일
@@ -136,7 +156,7 @@ function App() {
         </header>
 
         {/* Dashboard Content */}
-        <div className="px-8 py-6">
+        <div className="px-4 sm:px-8 py-6">
           {status === 'analyzing' && (
             <div className="mb-6">
               <AnalysisProgress />

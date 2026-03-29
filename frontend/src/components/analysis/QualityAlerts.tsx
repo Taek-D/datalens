@@ -20,7 +20,7 @@ function getSeverityClasses(severity: string): string {
 const AlertBanner = React.memo(function AlertBanner({ alert }: AlertBannerProps) {
   const classes = getSeverityClasses(alert.severity);
   return (
-    <div className={`rounded-lg px-4 py-3 ${classes}`} role="alert">
+    <div className={`rounded-lg px-4 py-3 transition-all hover:shadow-sm cursor-default ${classes}`} role="alert">
       <span className="font-medium">{alert.column}</span>
       {': '}
       <span>{alert.message}</span>
