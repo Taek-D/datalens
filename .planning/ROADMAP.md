@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Skeleton + Deploy** - Monorepo scaffold, data contracts, CI, and live deployment targets on Vercel + Render
 - [x] **Phase 2: Upload + API + State** - End-to-end upload-to-analysis pipeline with backend services, Zustand store, hooks, and tests (completed 2026-03-27)
 - [x] **Phase 3: Visualization** - All chart surfaces, outlier panel, correlation heatmap, summary cards, and data quality alerts (completed 2026-03-29)
-- [ ] **Phase 4: Polish + Edge Cases** - Full integration test, adversarial input hardening, UX polish, and demo-day verification
+- [x] **Phase 4: Polish + Edge Cases** - Full integration test, adversarial input hardening, UX polish, and demo-day verification (completed 2026-03-29)
 
 ## Phase Details
 
@@ -82,7 +82,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 04-01-PLAN.md — Integration test (upload -> analyze -> chart render pipeline, edge cases: 0/1 numeric columns + all-null column, sequential upload state reset, cold-start banner), tsc --strict zero-error audit
+- [x] 04-01-PLAN.md — Integration test (upload -> analyze -> chart render pipeline, edge cases: 0/1 numeric columns + all-null column, sequential upload state reset, cold-start banner), tsc --strict zero-error audit
 
 ## Progress
 
@@ -94,4 +94,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Skeleton + Deploy | 2/2 | Complete    | 2026-03-27 |
 | 2. Upload + API + State | 2/2 | Complete   | 2026-03-27 |
 | 3. Visualization | 3/3 | Complete   | 2026-03-29 |
-| 4. Polish + Edge Cases | 0/1 | Not started | - |
+| 4. Polish + Edge Cases | 1/1 | Complete    | 2026-03-29 |

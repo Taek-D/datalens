@@ -68,7 +68,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **TEST-02**: ChartRouter 타입 분기 로직에 유닛 테스트가 존재한다
 - [x] **TEST-03**: analysisApi에 MSW 기반 모킹 테스트가 존재한다
 - [x] **TEST-04**: 백엔드 서비스에 pytest 테스트가 존재한다
-- [ ] **TEST-05**: 업로드 → 분석 → 차트 렌더링 통합 테스트가 존재한다
+- [x] **TEST-05**: 업로드 → 분석 → 차트 렌더링 통합 테스트가 존재한다
 
 ## v2 Requirements
 
@@ -135,7 +135,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | TEST-02 | Phase 3 | Complete |
 | TEST-03 | Phase 2 | Complete |
 | TEST-04 | Phase 2 | Complete |
-| TEST-05 | Phase 4 | Pending |
+| TEST-05 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 39 total

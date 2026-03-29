@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-03-29T01:22:32.711Z"
-last_activity: "2026-03-29 — Plan 03-03 complete: CorrelationHeatmap + ScatterModal + OutlierPanel + AnalysisView + App.tsx wired"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-29T01:50:29Z"
+last_activity: "2026-03-29 — Plan 04-01 complete: integration test suite (6 cases) + /health MSW handler + tsc 0 errors"
 progress:
   total_phases: 4
   completed_phases: 3
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 ## Current Position
 
-Phase: 3 of 4 (Visualization) — Complete
-Plan: 3 of 3 in phase (all plans done)
-Status: Phase 3 complete — ready for Phase 4 (Polish)
-Last activity: 2026-03-29 — Plan 03-03 complete: CorrelationHeatmap + ScatterModal + OutlierPanel + AnalysisView + App.tsx wired
+Phase: 4 of 4 (Polish + Edge Cases) — In Progress
+Plan: 1 of 1 in phase (plan 04-01 complete)
+Status: Phase 4 plan 1 complete — TEST-05 satisfied
+Last activity: 2026-03-29 — Plan 04-01 complete: integration test suite (6 cases) + /health MSW handler + tsc 0 errors
 
 Progress: [██████████] 100%
 
@@ -94,6 +94,9 @@ Recent decisions affecting current work:
 - [03-03]: CorrelationHeatmap uses custom cell => rgb color function instead of ContinuousColorScaleConfig — avoids nivo 0.99 type complexity while achieving identical blue-white-red visual
 - [03-03]: ScatterModal uses cancelled flag pattern in useEffect cleanup to prevent setState after unmount
 - [03-03]: AnalysisView section order: SummaryCard -> QualityAlerts -> ColumnStatsTable -> DistributionGrid -> CorrelationHeatmap -> OutlierPanel (per user EDA workflow decision)
+- [04-01]: Mock DataTable and OutlierPanel at module level in integration tests — react-window requires ResizeObserver which does not exist in jsdom
+- [04-01]: Mock CorrelationHeatmap in tests replicating the < 2 columns guard — allows edge-case test to work without @nivo/heatmap SVG rendering
+- [04-01]: Use act(async () => vi.advanceTimersByTime(N)) pattern to flush React state updates triggered by fake timers
 
 ### Pending Todos
 
@@ -108,6 +111,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-03-29T01:10:30Z
-Stopped at: Completed 03-03-PLAN.md
-Resume file: .planning/phases/03-visualization/03-03-SUMMARY.md
+Last session: 2026-03-29T01:50:29Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: .planning/phases/04-polish-+-edge-cases/04-01-SUMMARY.md
