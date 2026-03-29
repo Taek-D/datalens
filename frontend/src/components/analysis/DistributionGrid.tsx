@@ -47,7 +47,7 @@ export const DistributionGrid = memo(function DistributionGrid() {
   return (
     <section>
       <h2 className="text-lg font-semibold mb-3 text-text">분포 차트</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 stagger">
         {columns.map((col) => (
           <ColumnChartRow
             key={col.name}

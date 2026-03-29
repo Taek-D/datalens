@@ -100,7 +100,12 @@ function App() {
 
       <Sidebar onNewFile={resetStore} fileName={fileName ?? undefined} />
 
-      <main className="ml-60 min-h-screen">
+      {/* Skip link */}
+      <a href="#dashboard-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-64 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+        콘텐츠로 건너뛰기
+      </a>
+
+      <main className="ml-60 min-h-screen" id="dashboard-content">
         {/* Dashboard Header */}
         <header className="sticky top-0 z-30 bg-surface-raised/80 backdrop-blur-sm border-b border-border-light px-8 py-4">
           <div className="flex items-center justify-between">

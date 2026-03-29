@@ -94,7 +94,7 @@ export const SummaryCard = React.memo(function SummaryCard() {
   return (
     <div id="overview" className="scroll-mt-20">
       <h2 className="text-lg font-semibold mb-4 text-text">데이터 개요</h2>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
         <StatCard
           label="행 수"
           value={row_count.toLocaleString()}

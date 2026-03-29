@@ -41,7 +41,7 @@ export const Sidebar = memo(function Sidebar({ onNewFile, fileName }: SidebarPro
   }, []);
 
   const linkClass = (id: string) =>
-    `w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
+    `w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary ${
       active === id
         ? 'bg-primary-light text-primary font-medium'
         : 'text-text-muted hover:bg-surface hover:text-text'
@@ -69,7 +69,7 @@ export const Sidebar = memo(function Sidebar({ onNewFile, fileName }: SidebarPro
         <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wider px-3 mb-2">분석</p>
         <div className="flex flex-col gap-0.5">
           {ANALYSIS_NAV.map((item) => (
-            <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)}>
+            <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)} aria-current={active === item.id ? 'true' : undefined}>
               <NavIcon path={item.path} />
               {item.label}
             </button>
@@ -79,7 +79,7 @@ export const Sidebar = memo(function Sidebar({ onNewFile, fileName }: SidebarPro
         <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wider px-3 mt-5 mb-2">데이터</p>
         <div className="flex flex-col gap-0.5">
           {DATA_NAV.map((item) => (
-            <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)}>
+            <button key={item.id} type="button" onClick={() => handleClick(item.id)} className={linkClass(item.id)} aria-current={active === item.id ? 'true' : undefined}>
               <NavIcon path={item.path} />
               {item.label}
             </button>
