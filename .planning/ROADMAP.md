@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Skeleton + Deploy** - Monorepo scaffold, data contracts, CI, and live deployment targets on Vercel + Render
 - [x] **Phase 2: Upload + API + State** - End-to-end upload-to-analysis pipeline with backend services, Zustand store, hooks, and tests (completed 2026-03-27)
-- [ ] **Phase 3: Visualization** - All chart surfaces, outlier panel, correlation heatmap, summary cards, and data quality alerts
+- [x] **Phase 3: Visualization** - All chart surfaces, outlier panel, correlation heatmap, summary cards, and data quality alerts (completed 2026-03-29)
 - [ ] **Phase 4: Polish + Edge Cases** - Full integration test, adversarial input hardening, UX polish, and demo-day verification
 
 ## Phase Details
@@ -48,8 +48,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — FastAPI upload + analysis endpoints (parser_service, stats_service, correlation_service, outlier_service, run_in_executor, pytest coverage)
-- [ ] 02-02-PLAN.md — Zustand store (3 slices + resetStore), API service layer, useUpload + useAnalysis hooks, DropZone, DataTable with react-window, MSW mocks, Vitest tests
+- [x] 02-01-PLAN.md — FastAPI upload + analysis endpoints (parser_service, stats_service, correlation_service, outlier_service, run_in_executor, pytest coverage)
+- [x] 02-02-PLAN.md — Zustand store (3 slices + resetStore), API service layer, useUpload + useAnalysis hooks, DropZone, DataTable with react-window, MSW mocks, Vitest tests
 
 ### Phase 3: Visualization
 **Goal**: All analysis results from Phase 2 are rendered as interactive, correctly-typed chart components — histogram, bar chart, timeseries, correlation heatmap with scatter modal, outlier toggle, summary card, missing value visualization, and data quality alerts
@@ -65,9 +65,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Distribution charts (ChartRouter + CHART_MAP, HistogramChart, BarChart, TimeseriesChart, DistributionGrid 2-col layout, column focus, useChartData hook, showOutliers state, React.memo + useMemo, ChartRouter unit tests)
+- [x] 03-01-PLAN.md — Distribution charts (ChartRouter + CHART_MAP, HistogramChart, BarChart, TimeseriesChart, DistributionGrid 2-col layout, column focus, useChartData hook, showOutliers state, React.memo + useMemo, ChartRouter unit tests)
 - [x] 03-02-PLAN.md — Summary card (4-stat grid), column stats table, quality alerts (severity banners), backend scatter endpoint with 2000-point downsampling
-- [ ] 03-03-PLAN.md — Correlation heatmap (@nivo/heatmap, cell click), scatter modal (Recharts ScatterChart), outlier panel (IQR table + global toggle), AnalysisView container, App.tsx wiring
+- [x] 03-03-PLAN.md — Correlation heatmap (@nivo/heatmap, cell click), scatter modal (Recharts ScatterChart), outlier panel (IQR table + global toggle), AnalysisView container, App.tsx wiring
 
 ### Phase 4: Polish + Edge Cases
 **Goal**: The full upload-to-visualization pipeline is verified end-to-end against adversarial inputs, edge cases produce graceful states rather than crashes, and the deployed demo reliably delivers the core value promise within 3 seconds
@@ -93,5 +93,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Skeleton + Deploy | 2/2 | Complete    | 2026-03-27 |
 | 2. Upload + API + State | 2/2 | Complete   | 2026-03-27 |
-| 3. Visualization | 2/3 | In Progress|  |
+| 3. Visualization | 3/3 | Complete   | 2026-03-29 |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |

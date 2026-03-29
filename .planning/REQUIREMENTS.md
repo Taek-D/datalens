@@ -39,15 +39,15 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **VIZL-02**: 카테고리형 컬럼에 바차트를 자동 렌더링한다 (상위 20개)
 - [x] **VIZL-03**: 날짜형 컬럼에 타임시리즈 라인차트를 자동 렌더링한다
 - [x] **VIZL-04**: 컬럼 클릭 시 해당 차트로 포커스가 이동한다
-- [ ] **VIZL-05**: 수치형 컬럼 간 Pearson 상관관계 히트맵을 표시한다 (@nivo/heatmap)
-- [ ] **VIZL-06**: 히트맵 셀 클릭 시 해당 두 컬럼의 산점도 모달을 표시한다
+- [x] **VIZL-05**: 수치형 컬럼 간 Pearson 상관관계 히트맵을 표시한다 (@nivo/heatmap)
+- [x] **VIZL-06**: 히트맵 셀 클릭 시 해당 두 컬럼의 산점도 모달을 표시한다
 - [ ] **VIZL-07**: 산점도 데이터는 서버에서 2,000개 이하로 다운샘플링한다
 
 ### Outlier Detection
 
-- [ ] **OTLR-01**: IQR 방식으로 각 수치형 컬럼의 이상값을 자동 탐지한다
-- [ ] **OTLR-02**: 각 컬럼별 이상값 개수와 IQR 경계를 표시한다
-- [ ] **OTLR-03**: 이상값 포함/제외 토글 시 차트와 통계가 실시간 반영된다
+- [x] **OTLR-01**: IQR 방식으로 각 수치형 컬럼의 이상값을 자동 탐지한다
+- [x] **OTLR-02**: 각 컬럼별 이상값 개수와 IQR 경계를 표시한다
+- [x] **OTLR-03**: 이상값 포함/제외 토글 시 차트와 통계가 실시간 반영된다
 
 ### Summary & Quality
 
@@ -60,7 +60,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **PERF-01**: Zustand DatasetStore로 전역 상태를 관리한다 (3 슬라이스: dataset, analysis, ui)
 - [x] **PERF-02**: React.memo + useMemo로 불필요한 차트 리렌더링을 방지한다
-- [ ] **PERF-03**: react-window로 대용량 데이터 테이블을 가상화한다
+- [x] **PERF-03**: react-window로 대용량 데이터 테이블을 가상화한다
 
 ### Testing
 
@@ -118,19 +118,19 @@ Deferred to future release. Tracked but not in current roadmap.
 | VIZL-02 | Phase 3 | Complete |
 | VIZL-03 | Phase 3 | Complete |
 | VIZL-04 | Phase 3 | Complete |
-| VIZL-05 | Phase 3 | Pending |
-| VIZL-06 | Phase 3 | Pending |
+| VIZL-05 | Phase 3 | Complete |
+| VIZL-06 | Phase 3 | Complete |
 | VIZL-07 | Phase 3 | Pending |
-| OTLR-01 | Phase 3 | Pending |
-| OTLR-02 | Phase 3 | Pending |
-| OTLR-03 | Phase 3 | Pending |
+| OTLR-01 | Phase 3 | Complete |
+| OTLR-02 | Phase 3 | Complete |
+| OTLR-03 | Phase 3 | Complete |
 | SUMM-01 | Phase 3 | Pending |
 | SUMM-02 | Phase 3 | Pending |
 | SUMM-03 | Phase 3 | Pending |
 | SUMM-04 | Phase 3 | Pending |
 | PERF-01 | Phase 2 | Complete |
 | PERF-02 | Phase 3 | Complete |
-| PERF-03 | Phase 3 | Pending |
+| PERF-03 | Phase 3 | Complete |
 | TEST-01 | Phase 2 | Complete |
 | TEST-02 | Phase 3 | Complete |
 | TEST-03 | Phase 2 | Complete |
