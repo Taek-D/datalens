@@ -25,5 +25,6 @@ Thumbs.db
 frontend/.omc/
 backend/.omc/
 
-# Screenshots
+# Screenshots (allow screenshots/ folder)
 *.png
+!screenshots/*.png
