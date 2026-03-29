@@ -41,7 +41,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **VIZL-04**: 컬럼 클릭 시 해당 차트로 포커스가 이동한다
 - [x] **VIZL-05**: 수치형 컬럼 간 Pearson 상관관계 히트맵을 표시한다 (@nivo/heatmap)
 - [x] **VIZL-06**: 히트맵 셀 클릭 시 해당 두 컬럼의 산점도 모달을 표시한다
-- [ ] **VIZL-07**: 산점도 데이터는 서버에서 2,000개 이하로 다운샘플링한다
+- [x] **VIZL-07**: 산점도 데이터는 서버에서 2,000개 이하로 다운샘플링한다
 
 ### Outlier Detection
 
@@ -51,10 +51,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Summary & Quality
 
-- [ ] **SUMM-01**: 데이터셋 개요 카드를 표시한다 (행 수, 컬럼 수, 결측값 비율, 중복 행 수)
-- [ ] **SUMM-02**: 수치형 컬럼 기초통계를 표시한다 (mean, std, min, max, Q1, median, Q3, skewness)
-- [ ] **SUMM-03**: 컬럼별 결측값 분석을 시각화한다
-- [ ] **SUMM-04**: 데이터 품질 알림을 표시한다 (상수 컬럼, 높은 카디널리티, 높은 null 비율, 심한 왜도)
+- [x] **SUMM-01**: 데이터셋 개요 카드를 표시한다 (행 수, 컬럼 수, 결측값 비율, 중복 행 수)
+- [x] **SUMM-02**: 수치형 컬럼 기초통계를 표시한다 (mean, std, min, max, Q1, median, Q3, skewness)
+- [x] **SUMM-03**: 컬럼별 결측값 분석을 시각화한다
+- [x] **SUMM-04**: 데이터 품질 알림을 표시한다 (상수 컬럼, 높은 카디널리티, 높은 null 비율, 심한 왜도)
 
 ### State & Performance
 
@@ -120,14 +120,14 @@ Deferred to future release. Tracked but not in current roadmap.
 | VIZL-04 | Phase 3 | Complete |
 | VIZL-05 | Phase 3 | Complete |
 | VIZL-06 | Phase 3 | Complete |
-| VIZL-07 | Phase 3 | Pending |
+| VIZL-07 | Phase 3 | Complete |
 | OTLR-01 | Phase 3 | Complete |
 | OTLR-02 | Phase 3 | Complete |
 | OTLR-03 | Phase 3 | Complete |
-| SUMM-01 | Phase 3 | Pending |
-| SUMM-02 | Phase 3 | Pending |
-| SUMM-03 | Phase 3 | Pending |
-| SUMM-04 | Phase 3 | Pending |
+| SUMM-01 | Phase 3 | Complete |
+| SUMM-02 | Phase 3 | Complete |
+| SUMM-03 | Phase 3 | Complete |
+| SUMM-04 | Phase 3 | Complete |
 | PERF-01 | Phase 2 | Complete |
 | PERF-02 | Phase 3 | Complete |
 | PERF-03 | Phase 3 | Complete |
