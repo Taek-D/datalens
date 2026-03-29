@@ -12,6 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nivo/core": "^0.99.0",
+    "@nivo/heatmap": "^0.99.0",
     "@tailwindcss/vite": "^4.2.2",
     "axios": "^1.13.6",
     "react": "^19.2.4",
