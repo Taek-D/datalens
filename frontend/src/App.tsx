@@ -5,6 +5,7 @@ import { useAnalysis } from './hooks/useAnalysis';
 import { DropZone } from './components/DropZone';
 import { DataTable } from './components/DataTable';
 import { AnalysisProgress } from './components/AnalysisProgress';
+import { AnalysisView } from './components/analysis/AnalysisView';
 
 type ServerStatus = 'idle' | 'warming' | 'ready' | 'error';
 
@@ -63,11 +64,9 @@ function App() {
 
       case 'done':
         return (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-6">
+            <AnalysisView />
             <DataTable columns={columns} data={rawData} />
-            <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-6 text-center text-gray-400 text-sm">
-              차트 및 분석 결과는 Phase 3에서 추가됩니다.
-            </div>
           </div>
         );
 
