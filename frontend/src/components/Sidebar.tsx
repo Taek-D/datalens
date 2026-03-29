@@ -1,4 +1,4 @@
-import { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, useEffect, useRef } from 'react';
 
 interface NavItem {
   id: string;
@@ -34,10 +34,39 @@ function NavIcon({ path }: { path: string }) {
 
 export const Sidebar = memo(function Sidebar({ onNewFile, fileName }: SidebarProps) {
   const [active, setActive] = useState('overview');
+  const isClickScrolling = useRef(false);
+
+  // Scroll spy: track which section is visible
+  useEffect(() => {
+    const allIds = [...ANALYSIS_NAV, ...DATA_NAV].map((item) => item.id);
+    if (typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isClickScrolling.current) return;
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+            break;
+          }
+        }
+      },
+      { rootMargin: '-80px 0px -60% 0px', threshold: 0 },
+    );
+
+    for (const id of allIds) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleClick = useCallback((id: string) => {
     setActive(id);
+    isClickScrolling.current = true;
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Re-enable scroll spy after scroll animation completes
+    setTimeout(() => { isClickScrolling.current = false; }, 800);
   }, []);
 
   const linkClass = (id: string) =>
