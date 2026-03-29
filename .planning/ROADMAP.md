@@ -66,7 +66,7 @@ Plans:
 
 Plans:
 - [ ] 03-01-PLAN.md — Distribution charts (ChartRouter + CHART_MAP, HistogramChart, BarChart, TimeseriesChart, DistributionGrid 2-col layout, column focus, useChartData hook, showOutliers state, React.memo + useMemo, ChartRouter unit tests)
-- [ ] 03-02-PLAN.md — Summary card (4-stat grid), column stats table, quality alerts (severity banners), backend scatter endpoint with 2000-point downsampling
+- [x] 03-02-PLAN.md — Summary card (4-stat grid), column stats table, quality alerts (severity banners), backend scatter endpoint with 2000-point downsampling
 - [ ] 03-03-PLAN.md — Correlation heatmap (@nivo/heatmap, cell click), scatter modal (Recharts ScatterChart), outlier panel (IQR table + global toggle), AnalysisView container, App.tsx wiring
 
 ### Phase 4: Polish + Edge Cases
@@ -93,5 +93,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Skeleton + Deploy | 2/2 | Complete    | 2026-03-27 |
 | 2. Upload + API + State | 2/2 | Complete   | 2026-03-27 |
-| 3. Visualization | 0/3 | Not started | - |
+| 3. Visualization | 2/3 | In progress | - |
 | 4. Polish + Edge Cases | 0/1 | Not started | - |

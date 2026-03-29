@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-28T17:29:16.040Z"
-last_activity: "2026-03-27 — Plan 02-02 complete: Frontend upload-to-analysis pipeline with 21 passing Vitest tests"
+stopped_at: "Completed 03-02-PLAN.md"
+last_updated: "2026-03-29T01:01:00Z"
+last_activity: "2026-03-29 — Plan 03-02 complete: SummaryCard, ColumnStatsTable, QualityAlerts + POST /api/scatter with 2000-point downsampling"
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
-  percent: 50
+  total_plans: 7
+  completed_plans: 6
+  percent: 64
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 ## Current Position
 
-Phase: 2 of 4 (Upload + API + State) — Complete
-Plan: 2 of 2 in phase (plan 02 done)
+Phase: 3 of 4 (Visualization) — In Progress
+Plan: 2 of 3 in phase (plan 02 done)
 Status: In progress
-Last activity: 2026-03-27 — Plan 02-02 complete: Frontend upload-to-analysis pipeline with 21 passing Vitest tests
+Last activity: 2026-03-29 — Plan 03-02 complete: SummaryCard, ColumnStatsTable, QualityAlerts + POST /api/scatter with 2000-point downsampling
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 64%
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 02-upload-api-state P02 | 24 | 2 tasks | 20 files |
+| Phase 03-visualization P02 | 8 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,10 @@ Recent decisions affecting current work:
 - [Phase 02-upload-api-state]: import type required for all type-only imports — verbatimModuleSyntax is enabled in tsconfig
 - [Phase 02-upload-api-state]: Cosmetic analysis steps (4 x 300ms) before API response — backend runs all analysis in one POST call, steps are UX-only progress indicators
 - [Phase 02-upload-api-state]: validateFile exported as named function — enables pure unit testing independent of hook rendering
+- [03-02]: QualityAlerts returns null when quality_alerts is empty — no empty state UI, keeps EDA layout clean
+- [03-02]: Missing ratio color thresholds: green <5%, yellow 5-20%, red >20% — mirrors common EDA tool conventions
+- [03-02]: Scatter downsampling uses random_state=42 for reproducible point sets across repeated requests for same file
+- [03-02]: ColumnStatsTable renders "-" for null stat values (not 0) to avoid misleading zero display
 
 ### Pending Todos
 
