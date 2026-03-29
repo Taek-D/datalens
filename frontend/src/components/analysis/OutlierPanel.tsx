@@ -40,9 +40,6 @@ function OutlierRow({ index, style, outliers }: RowComponentProps<OutlierRowProp
 
 export const OutlierPanel = React.memo(function OutlierPanel() {
   const outliers = useStore((s) => s.analysisResult?.outliers);
-  const showOutliers = useStore((s) => s.showOutliers);
-  const setShowOutliers = useStore((s) => s.setShowOutliers);
-
   if (!outliers) {
     return (
       <section>
@@ -63,31 +60,7 @@ export const OutlierPanel = React.memo(function OutlierPanel() {
 
   return (
     <section>
-      {/* Section header with toggle */}
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-lg font-semibold text-text">이상값 분석</h2>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setShowOutliers(!showOutliers)}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-              showOutliers ? 'bg-primary' : 'bg-gray-300'
-            }`}
-            role="switch"
-            aria-checked={showOutliers}
-            aria-label={showOutliers ? '이상값 포함' : '이상값 제외'}
-          >
-            <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                showOutliers ? 'translate-x-6' : 'translate-x-1'
-              }`}
-            />
-          </button>
-          <span className="text-sm text-text-muted">
-            {showOutliers ? '이상값 포함' : '이상값 제외'}
-          </span>
-        </div>
-      </div>
+      <h2 className="text-lg font-semibold mb-3 text-text">이상값 분석</h2>
 
       {/* Table */}
       <div className="border border-border rounded-lg overflow-hidden">
