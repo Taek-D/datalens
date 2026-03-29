@@ -17,7 +17,7 @@ from schemas.analysis import AnalysisResultResponse
 
 router = APIRouter()
 
-_executor = ThreadPoolExecutor(max_workers=2)
+_executor = ThreadPoolExecutor(max_workers=4)
 
 
 class AnalyzeRequest(BaseModel):
@@ -36,11 +36,13 @@ async def analyze_dataset(body: AnalyzeRequest) -> AnalysisResultResponse:
 
     loop = asyncio.get_event_loop()
 
-    # Run CPU-bound services off the event loop thread
-    stats = await loop.run_in_executor(_executor, stats_service.analyze, df)
-    correlation = await loop.run_in_executor(_executor, correlation_service.analyze, df)
-    outliers = await loop.run_in_executor(_executor, outlier_service.analyze, df)
-    quality = await loop.run_in_executor(_executor, quality_service.analyze, df)
+    # Run all four analysis services in parallel off the event loop
+    stats, correlation, outliers, quality = await asyncio.gather(
+        loop.run_in_executor(_executor, stats_service.analyze, df),
+        loop.run_in_executor(_executor, correlation_service.analyze, df),
+        loop.run_in_executor(_executor, outlier_service.analyze, df),
+        loop.run_in_executor(_executor, quality_service.analyze, df),
+    )
 
     total_cells = df.size
     missing_cells = int(df.isnull().sum().sum())

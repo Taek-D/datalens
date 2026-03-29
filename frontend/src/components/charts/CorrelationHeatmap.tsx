@@ -64,7 +64,6 @@ export const CorrelationHeatmap = React.memo(function CorrelationHeatmap({
 
   const handleClick = (
     cell: ComputedCell<DefaultHeatMapDatum>,
-    _event: React.MouseEvent,
   ) => {
     const colX = String(cell.data.x);
     const colY = cell.serieId;

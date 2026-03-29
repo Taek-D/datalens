@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CHART_MAP } from '../ChartRouter';
+import { CHART_MAP } from '../chartMap';
 import { HistogramChart } from '../HistogramChart';
 import { BarChartComponent } from '../BarChartComponent';
 import { TimeseriesChart } from '../TimeseriesChart';

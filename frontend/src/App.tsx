@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { apiClient } from './api/client';
 import { useStore } from './store';
 import { useAnalysis } from './hooks/useAnalysis';
 import { DropZone } from './components/DropZone';
 import { DataTable } from './components/DataTable';
 import { AnalysisProgress } from './components/AnalysisProgress';
-import { AnalysisView } from './components/analysis/AnalysisView';
+
+const AnalysisView = lazy(() =>
+  import('./components/analysis/AnalysisView').then((m) => ({ default: m.AnalysisView })),
+);
 
 type ServerStatus = 'idle' | 'warming' | 'ready' | 'error';
 
@@ -64,7 +67,9 @@ function App() {
       case 'done':
         return (
           <div className="flex flex-col gap-6">
-            <AnalysisView />
+            <Suspense fallback={<div className="text-sm text-text-muted text-center py-8">분석 결과를 불러오는 중...</div>}>
+              <AnalysisView />
+            </Suspense>
             <DataTable columns={columns} data={rawData} />
           </div>
         );
