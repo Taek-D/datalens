@@ -1,90 +1,88 @@
-# DataLens — Interactive Dataset Explorer
+# DataLens
 
-> "Jupyter를 띄우지 않고도 브라우저에서 바로 EDA를 할 수 있는 도구가 있다면 어떨까?"라는 질문에서 시작했습니다.
+CSV나 JSON 파일을 올리면 분포, 상관관계, 이상값, 데이터 품질 문제를 바로 보여 주는 웹 기반 탐색적 데이터 분석(EDA) 도구입니다.
 
-CSV/JSON 파일을 드래그앤드롭하면 자동으로 분포, 상관관계, 이상값을 탐색하는 웹 기반 EDA(탐색적 데이터 분석) 플랫폼.
+- 라이브: https://datalens-tau.vercel.app
+- 백엔드는 무료 인스턴스라 한동안 요청이 없으면 잠듭니다. 첫 요청은 1분가량 걸릴 수 있고, 화면에 서버를 깨우는 중이라는 안내가 뜹니다.
 
-**Live Demo**: [datalens-tau.vercel.app](https://datalens-tau.vercel.app/)
+![대시보드](screenshots/screenshot-1-dashboard-viewport.png)
 
-## 주요 기능
+## 왜 만들었나
 
-- **파일 업로드** — CSV/JSON 드래그앤드롭 + 자동 파싱, 10MB 제한
-- **컬럼 타입 자동 감지** — 숫자 / 카테고리 / 날짜 / 텍스트 4종 분류
-- **미리보기 테이블** — 첫 50행을 react-window 가상화로 즉시 렌더링
-- **분포 차트** — 숫자형은 히스토그램, 카테고리형은 바차트, 날짜형은 타임시리즈 자동 선택
-- **상관관계 히트맵** — Pearson 상관계수 매트릭스 + 셀 클릭 시 산점도 모달 (2,000개 다운샘플링)
-- **이상값 탐지** — IQR 기반 자동 탐지 + 전체 토글로 실시간 차트 반영
-- **요약 대시보드** — 행 수, 컬럼 수, 결측값 비율, 중복 행 수
-- **데이터 품질 알림** — 상수 컬럼, 높은 카디널리티, 높은 null 비율, 심한 왜도 감지
+데이터를 처음 받으면 분포를 보고, 결측과 이상값을 찾고, 컬럼끼리 상관을 확인하는 일을 매번 반복합니다. 노트북을 띄워 같은 코드를 다시 쓰는 대신, 파일을 끌어다 놓으면 이 첫 단계가 끝나도록 만들었습니다.
+
+## 무엇을 하는가
+
+- **업로드**: CSV·JSON을 끌어다 놓으면 파싱하고 컬럼을 숫자, 카테고리, 날짜, 텍스트 네 가지로 분류합니다. 파일은 10MB까지 받습니다.
+- **미리보기**: 첫 50행을 가상화 테이블로 보여 줍니다.
+- **분포**: 컬럼 타입에 따라 히스토그램, 막대 차트, 시계열 차트를 자동으로 고릅니다.
+- **상관관계**: Pearson 상관계수 히트맵을 그리고, 칸을 누르면 두 컬럼의 산점도를 띄웁니다.
+- **이상값**: IQR 기준으로 찾고, 토글로 차트에서 넣거나 뺍니다.
+- **요약과 품질 알림**: 행·컬럼 수, 결측 비율, 중복 행 수를 보여 주고, 값이 하나뿐인 컬럼, 결측이 절반을 넘는 컬럼, 고유값이 지나치게 많은 카테고리 컬럼, 심하게 치우친 분포를 알려 줍니다.
+
+## 구조
+
+```text
+ 브라우저
+   │  파일 업로드
+   ▼
+ React SPA (Vercel)                       frontend/
+   │  상태: Zustand (dataset / analysis / ui 세 조각)
+   │  REST (axios)
+   ▼
+ FastAPI (Render)                         backend/
+   POST /api/upload    파싱 → 컬럼 타입 추론 → 메모리에 보관 → 미리보기 50행
+   POST /api/analyze   통계 · 상관 · 이상값 · 품질 네 서비스를 동시에 실행
+   POST /api/scatter   두 컬럼의 산점도 (최대 2,000점)
+   GET  /health
+```
+
+- 프런트 상태는 원본 데이터(`datasetSlice`), 분석 결과(`analysisSlice`), 화면 상태(`uiSlice`)로 나눴습니다. 화면 상태는 `idle → uploading → analyzing → done`(또는 `error`)으로만 바뀝니다.
+- 백엔드는 라우터(`app/api`)와 분석 서비스(`app/services`)를 분리했습니다. 서비스는 DataFrame을 받아 결과를 돌려주는 순수 함수라 HTTP 없이 테스트합니다.
+
+## 설계 결정
+
+**1. 분석은 브라우저가 아니라 서버에서 합니다.**
+통계 계산에 pandas·numpy·scipy를 그대로 쓰기 위해서입니다. 브라우저의 Web Worker로 처리하는 방법도 있었지만, 같은 계산을 JavaScript로 다시 구현해야 하고 결과의 일관성을 따로 검증해야 합니다.
+
+**2. 네 가지 분석을 스레드 풀에서 동시에 돌립니다.**
+pandas 연산은 동기 함수라 그대로 호출하면 이벤트 루프가 막힙니다. `asyncio.gather`와 `run_in_executor`로 통계, 상관, 이상값, 품질 분석을 동시에 실행합니다(`backend/app/api/analyze.py`).
+
+**3. 큰 데이터는 서버에서 줄여서 보냅니다.**
+산점도는 2,000점을 넘으면 서버에서 표본을 뽑아 보냅니다. 표본 추출의 시드를 고정해 같은 요청에는 같은 그림이 나옵니다(`backend/app/api/scatter.py`). 미리보기 테이블과 이상값 목록은 `react-window`로 화면에 보이는 행만 그립니다.
+
+**4. 차트 라이브러리를 용도에 따라 나눴습니다.**
+분포 차트는 React 컴포넌트로 선언할 수 있는 Recharts를 씁니다. Recharts에는 히트맵이 없어서 상관관계 히트맵만 `@nivo/heatmap`을 씁니다.
+
+**5. `any`를 쓰지 않습니다.**
+프런트 소스에 `any` 타입이 없고, 빌드가 타입 검사를 포함합니다. API 응답 타입은 `frontend/src/types`에 모아 두고 컴포넌트 props는 `interface`로 선언합니다.
+
+## 검증
+
+| 대상 | 내용 | 결과 |
+|---|---|---|
+| 프런트엔드 | Vitest + React Testing Library, API는 MSW로 모킹 | 11개 파일 48건 통과 (작성 예정 표시 2건) |
+| 프런트엔드 | ESLint, 타입 검사를 포함한 빌드(`tsc -b && vite build`) | 통과 |
+| 백엔드 | pytest (분석 서비스, 업로드·산점도 API, CORS, 헬스 체크) | 62건 통과 |
+| CI | PR이 열리면 프런트 린트·테스트·빌드와 백엔드 pytest를 실행하도록 구성 | `.github/workflows/ci.yml` |
+
+```bash
+cd frontend && pnpm test
+cd backend && python -m pytest
+```
 
 ## 기술 스택
 
-| 영역 | 기술 |
-|------|------|
-| **프론트엔드** | React 19 + TypeScript, Vite, Zustand, Recharts, @nivo/heatmap, Tailwind CSS 4 |
-| **백엔드** | FastAPI, pandas, numpy, scipy |
-| **테스트** | Vitest + React Testing Library, pytest, MSW |
-| **배포** | Vercel (FE) + Render (BE) |
-| **CI** | GitHub Actions (PR마다 린트 + 테스트 + 빌드) |
-
-## 아키텍처
-
-```
-[Browser] → CSV/JSON upload → [React SPA (Vercel)]
-                                      │ REST API (axios)
-                                      ▼
-                               [FastAPI (Render)]
-                                      │ pandas 처리
-                                      ▼
-                               [분석 결과 JSON 반환]
-```
-
-**프론트엔드 상태 관리** — Zustand 3-slice 아키텍처:
-- `datasetSlice`: 원본 데이터, 컬럼 메타
-- `analysisSlice`: 분석 결과 (통계, 상관, 이상값, 품질 알림)
-- `uiSlice`: 상태 전이 (idle → uploading → analyzing → done), 이상값 토글
-
-**백엔드 분석 파이프라인** — 4개 서비스가 `run_in_executor`로 병렬 처리:
-- `parser_service`: 파일 파싱 + 컬럼 타입 추론
-- `stats_service`: 기초통계 (mean, std, Q1~Q3, skewness)
-- `correlation_service`: Pearson 상관 매트릭스
-- `outlier_service`: IQR 기반 이상값 탐지
-
-## 프로젝트 구조
-
-```
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── charts/          # ChartRouter, Histogram, BarChart, Timeseries, Heatmap, ScatterModal
-│   │   │   ├── analysis/        # SummaryCard, QualityAlerts, OutlierPanel, AnalysisView
-│   │   │   └── upload/          # DropZone, DataTable
-│   │   ├── hooks/               # useFileUpload, useChartData (모두 테스트 포함)
-│   │   ├── store/               # Zustand 3-slice store
-│   │   ├── api/                 # axios 클라이언트 + API 서비스
-│   │   ├── types/               # 공유 타입 정의
-│   │   └── mocks/               # MSW 핸들러
-│   └── vite.config.ts
-├── backend/
-│   ├── app/
-│   │   ├── api/                 # upload, analyze, scatter 라우터
-│   │   └── services/            # parser, stats, correlation, outlier 서비스
-│   ├── tests/                   # pytest 테스트
-│   └── main.py
-└── .github/workflows/           # CI 파이프라인
-```
+| 구분 | 내용 |
+|---|---|
+| 프런트엔드 | React 19, TypeScript, Vite, Zustand, Recharts, @nivo/heatmap, react-window, Tailwind CSS 4 |
+| 백엔드 | FastAPI, pandas, numpy, scipy |
+| 테스트 | Vitest, React Testing Library, MSW, pytest |
+| 배포·CI | Vercel(프런트), Render(백엔드), GitHub Actions |
 
 ## 로컬 실행
 
-### 프론트엔드
-
-```bash
-cd frontend
-pnpm install
-pnpm dev          # http://localhost:5173
-```
-
-### 백엔드
+**백엔드**
 
 ```bash
 cd backend
@@ -94,64 +92,22 @@ pip install -r requirements.txt
 uvicorn main:app --reload   # http://localhost:8000
 ```
 
-### 테스트
+**프런트엔드**
 
 ```bash
-# 프론트엔드 (48 tests)
-cd frontend && pnpm test
-
-# 백엔드 (62 tests)
-cd backend && python -m pytest
+cd frontend
+pnpm install
+pnpm dev                    # http://localhost:5173
 ```
 
-## API 엔드포인트
+환경 변수는 두 개입니다. 프런트의 `VITE_API_URL`(백엔드 주소, 기본값 `http://localhost:8000`)과 백엔드의 `ALLOWED_ORIGINS`(CORS 허용 origin, 쉼표로 구분)입니다.
 
-| Method | Path | 설명 |
-|--------|------|------|
-| GET | `/health` | 서버 상태 확인 |
-| POST | `/api/upload` | 파일 업로드 → 컬럼 메타 + 미리보기 50행 |
-| POST | `/api/analyze` | 분석 요청 → 분포/상관/이상값/요약 |
-| POST | `/api/scatter` | 산점도 데이터 → 2,000개 다운샘플링 |
+`sample-data/demo-dataset.csv`는 바로 올려 볼 수 있는 예시 데이터입니다. 자율주행 차량의 센서 수집 로그 형태로 만든 60행짜리 가상 데이터입니다.
 
-## 자율주행 데이터 플랫폼과의 연결
+## 알려진 제한
 
-데모 데이터와 분석 기능은 자율주행 센서 로그를 다루는 상황을 가정하고 만들었습니다:
-
-- **데모 데이터셋**: 자율주행 센서 로그 (GPS, IMU, LiDAR 타임스탬프, 카메라 프레임 수) — 실제 멀티모달 데이터 구조 반영
-- **시간축 분석**: datetime 컬럼 자동 감지 → 타임시리즈 차트로 센서 수집 패턴 시각화
-- **이상값 탐지**: IQR 기반 outlier 감지는 센서 오작동, GPS 드리프트, 캘리브레이션 이상 탐지에 직접 활용 가능
-- **상관관계 분석**: 센서 간 상관계수 매트릭스로 멀티모달 데이터 정합성 검증 가능 (e.g., GPS 속도 vs IMU 가속도)
-
-### 확장 가능성
-
-| 현재 구현 | 확장 방향 |
-|------|------|
-| CSV/JSON 파싱 | ROS bag, HDF5, Parquet 등 자율주행 표준 포맷 지원 |
-| 단일 파일 분석 | 다중 센서 시간 동기화(time-sync) 뷰어 |
-| 통계 기반 이상값 | ML 기반 이상 탐지 (Isolation Forest, DBSCAN) |
-| 2D 시각화 | 3D 포인트 클라우드 / 지도 오버레이 뷰어 |
-
-## 기술적 의사결정
-
-| 결정 | 이유 | 대안 검토 |
-|------|------|------|
-| **Recharts** (not D3) | React 컴포넌트 기반으로 선언적 차트 구성 가능, TS 타입 지원이 자연스러움 | D3는 저수준 제어에 강하지만 React와 DOM 관리 충돌, 러닝커브 높음 |
-| **Zustand** (not Redux) | 보일러플레이트 최소, 타입 추론 우수, 3-slice로 관심사 분리 | Redux Toolkit도 고려했으나 이 규모에서는 과잉 |
-| **FastAPI** (not Express) | pandas/numpy/scipy 생태계 직접 활용, 통계 분석에 Python이 자연스러움 | Express + Python microservice도 가능하지만 단일 서버가 운영 복잡도 낮음 |
-| **react-window** (not react-virtuoso) | 경량 (12KB), API 단순, 테이블/리스트 가상화에 충분 | react-virtuoso는 기능이 많지만 번들 크기 3배 |
-| **@nivo/heatmap** (not Recharts) | Recharts에 히트맵 차트 없음, Nivo는 D3 기반 색상 스케일과 인터랙션 내장 | ECharts도 가능하지만 React 통합이 덜 자연스러움 |
-| **분석 로직을 백엔드에** | 브라우저 연산 부담 제거, 일관된 결과 보장, 대용량 데이터 시 서버 스케일링 가능 | 프론트 Web Worker도 고려했으나 pandas 생태계 활용 불가 |
-
-## 성능 최적화
-
-- `React.memo` + `useMemo`로 무관한 상태 변경 시 차트 리렌더링 방지
-- `react-window`로 50행 이상 테이블 / 50개 이상 이상값 목록 가상화
-- `asyncio.gather` + `run_in_executor`로 4개 분석 서비스 병렬 처리 + 이벤트 루프 블로킹 방지
-- 산점도 데이터 서버사이드 2,000개 다운샘플링으로 브라우저 부하 감소
-
-## 코드 품질 규칙
-
-- `any` 타입 절대 금지 — `tsc --strict` zero-error
-- 모든 커스텀 훅 테스트 필수
-- Props는 반드시 `interface`로 명시
-- Tailwind CSS만 사용 (인라인 style 금지, Recharts 예외)
+- **데이터는 서버 메모리에만 있습니다.** 업로드한 파일은 DB나 파일로 저장하지 않으며, 서버가 재시작하면 사라집니다. 오래된 데이터를 지우는 만료 처리가 없습니다.
+- **로그인이 없습니다.** 사용자별 저장이나 분석 이력 기능이 없습니다.
+- **첫 요청이 느립니다.** 백엔드 무료 인스턴스가 잠들었다 깨어나는 데 1분가량 걸릴 수 있습니다.
+- **파일 형식과 크기**: CSV와 JSON만 받고 10MB를 넘으면 거절합니다.
+- **이상값은 IQR 한 가지 기준**이며, 상관관계는 숫자 컬럼의 Pearson 계수만 계산합니다.
