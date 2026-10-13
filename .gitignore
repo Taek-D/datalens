@@ -28,3 +28,8 @@ backend/.omc/
 # Screenshots (allow screenshots/ folder)
 *.png
 !screenshots/*.png
+
+# 로컬 전용 작업 문서·도구 설정
+/DataLens_기획서.md
+/.planning/
+/CLAUDE.md
